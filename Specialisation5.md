@@ -168,7 +168,7 @@ In our example, after the network output was/were depending on the state of cat,
 ### LSTMs
 GRUs can allow us to learn very long range connections in a sequence. The other type of unit that allow us to do this very well is the LSTM or the long short term memory units. In LSTMs, instead of having one gate to decide wheather we update the date of the memory cell or not, we'll have two seperate gates, forget and update gate.
 
-<img src="figures/LSTms.png">
+<img src="figures/LSTMs.png">
 
 ### About the gates
 
@@ -288,8 +288,17 @@ Word embeddings can be used in analogies, given that the vector difference betwe
 $$ \operatorname{argmax}_w sim \left( e _ { w } , e _ { k i n g } - e _ { m a n } + e _ { w o m a n } \right)$$ 
 
 There is various similarity functions, such as:
-* Euclidean distance $\sqrt { \sum _ { i = 1 } ^ { k } \left( u _ { i } - v _ { i } \right) ^ { 2 } }$,
-* Cosine similarity: $\operatorname { sim } ( u , v ) = \cos ( \theta ) = \frac { u \cdot v } { \| u \| v \| }$
+
+**1- Euclidean distance** $\sqrt { \sum _ { i = 1 } ^ { k } \left( u _ { i } - v _ { i } \right) ^ { 2 } }$,
+
+**2- Cosine similarity**
+Given two vectors $u$ and $v$, cosine similarity is defined as follows: 
+
+$$\text{CosineSimilarity(u, v)} = \frac {u . v} {||u||_2 ||v||_2} = cos(\theta)$$
+
+where $u.v$ is the dot product (or inner product) of two vectors, $||u||_2$ is the norm (or length) of the vector $u$, and $\theta$ is the angle between $u$ and $v$. This similarity depends on the angle between $u$ and $v$. If $u$ and $v$ are very similar, their cosine similarity will be close to 1; if they are dissimilar, the cosine similarity will take a smaller value. 
+
+<img src="figures/cosine_sim.png" style="width:800px;height:250px;">
 
 **Embedding matrix** Let's start to formalize the problem of learning a good word embedding. When we implement an algorithm to learn a word embedding, we end up learning is an embedding matrix.
 
@@ -381,7 +390,30 @@ Word embeddings can reflect gender, ethnicity... and other biases of the text us
 2. Neutralize: for every word that is not definitional, project to get rid of bias.
 3. Equalise pairs.
 
-<img src="figures/biase.png" width="550">
+**Neutralizing bias for non-gender specific words** 
+If we're using a 50-dimensional word embedding, the 50 dimensional space can be split into two parts: The bias-direction $g$, and the remaining 49 dimensions, which we'll call $g_{\perp}$. In linear algebra, we say that the 49 dimensional $g_{\perp}$ is perpendicular (or "othogonal") to $g$, meaning it is at 90 degrees to $g$. The neutralization step takes a vector such as $e_{receptionist}$ and zeros out the component in the direction of $g$, giving us $e_{receptionist}^{debiased}$.
+
+Even though $g_{\perp}$ is 49 dimensional, given the limitations of what we can draw on a screen, we illustrate it using a 1 dimensional axis below.
+
+<img src="figures/neutral.png" style="width:600px">
+
+to compute $e^{debiased}$ by first computing $e^{bias\_component}$ as the projection of $e$ onto the direction $g$ and then substracting the bias componenet: 
+
+$$e^{bias\_component} = \frac{e \cdot g}{||g||_2^2} * g$$
+$$e^{debiased} = e - e^{bias\_component}$$
+
+**Equalization algorithm for gender-specific words**: Equalization is applied to pairs of words that you might want to have differ only through the gender property. As a concrete example, suppose that "actress" is closer to "babysit" than "actor." By applying neutralizing to "babysit" we can reduce the gender-stereotype associated with babysitting. But this still does not guarantee that "actor" and "actress" are equidistant from "babysit." The equalization algorithm takes care of this.
+
+The key idea behind equalization is to make sure that a particular pair of words are equi-distant from the 49-dimensional g⊥. The equalization step also ensures that the two equalized steps are now the same distance from edebiasedreceptionist, or from any other work that has been neutralized. In pictures, this is how equalization works: 
+
+<img src="figures/equalization.png" style="width:600px">
+
+This is done using the following equations:
+
+<img src="figures/equalization_algo.png" style="width:550px">
+
+These debiasing algorithms are very helpful for reducing bias, but are not perfect and do not eliminate all traces of bias. For example, one weakness of this implementation was that the bias direction $g$ was defined using only the pair of words _woman_ and _man_. As discussed earlier, if $g$ were defined by computing $g_1 = e_{woman} - e_{man}$; $g_2 = e_{mother} - e_{father}$; $g_3 = e_{girl} - e_{boy}$; and so on and averaging over them, we would obtain a better estimate of the "gender" dimension in the 50 dimensional word embedding space.
+
 
 ___
 ## WEEK 3
@@ -429,6 +461,29 @@ $$\frac { 1 } { T _ { y } ^ { \alpha } } \sum _ { t = 1 } ^ { T _ { y } } \log P
 *How to choose the width B:* with a large B, we get better result but the running time is slower, and with smaller B, the results are worse but the faster, but in general, we might get diminishing returns when we get to some value B.
 
 Side note: unlike exact search algorithms, Like BFS (breadth first search) or DFS (Depth first search), beam search runs faster but is not guaranteed to find maximum for arg max p(y | x).
+
+**Illustration of Attention mechanism**: Here is a  more detailed illustration of the attenstion mecanism. The diagram on the left shows the attention model. The diagram on the right shows what one "Attention" step does to calculate the attention variables $\alpha^{\langle t, t' \rangle}$, which are used to compute the context variable $context^{\langle t \rangle}$ for each timestep in the output ($t=1, \ldots, T_y$).
+
+<table>
+<td> 
+<img src="figures/attn_model.png" style="width:500;"> <br>
+</td> 
+<td> 
+<img src="figures/attn_mechanism.png" style="width:500;"> <br>
+</td> 
+</table>
+<caption>
+
+Here are some properties of the model: 
+
+- There are two separate LSTMs in this model (see diagram on the left). Because the one at the bottom of the picture is a Bi-directional LSTM and comes *before* the attention mechanism, we will call it *pre-attention* Bi-LSTM. The LSTM at the top of the diagram comes *after* the attention mechanism, so we will call it the *post-attention* LSTM. The pre-attention Bi-LSTM goes through $T_x$ time steps; the post-attention LSTM goes through $T_y$ time steps. 
+
+- The post-attention LSTM passes $s^{\langle t \rangle}, c^{\langle t \rangle}$ from one time step to the next. In the lecture videos, we were using only a basic RNN for the post-activation sequence model, so the state captured by the RNN output activations $s^{\langle t\rangle}$. But since we are using an LSTM here, the LSTM has both the output activation $s^{\langle t\rangle}$ and the hidden cell state $c^{\langle t\rangle}$. However, unlike previous text generation examples (such as Dinosaurus in week 1), in this model the post-activation LSTM at time $t$ does will not take the specific generated $y^{\langle t-1 \rangle}$ as input; it only takes $s^{\langle t\rangle}$ and $c^{\langle t\rangle}$ as input. We have designed the model this way, because (unlike language generation where adjacent characters are highly correlated) there isn't as strong a dependency between the previous character and the next character in a YYYY-MM-DD date. 
+
+- We use $a^{\langle t \rangle} = [\overrightarrow{a}^{\langle t \rangle}; \overleftarrow{a}^{\langle t \rangle}]$ to represent the concatenation of the activations of both the forward-direction and backward-directions of the pre-attention Bi-LSTM. 
+
+- The diagram on the right uses a `RepeatVector` node to copy $s^{\langle t-1 \rangle}$'s value $T_x$ times, and then `Concatenation` to concatenate $s^{\langle t-1 \rangle}$ and $a^{\langle t \rangle}$ to compute $e^{\langle t, t'\rangle}$, which is then passed through a softmax to compute $\alpha^{\langle t, t' \rangle}$. We'll explain how to use `RepeatVector` and `Concatenation` in Keras below. 
+
 
 **Error analysis in beam search**
 
@@ -496,4 +551,54 @@ One problem is the quadratic loss, where the number of weights is Tx * Ty, in ma
 
 the goal of speech recongnition, is to use an input x as 1D sound wave /  preprocess to obtain spectogramms, and obtain as ouput the transcript, we can use in such problem a RNN, taking as inputs the sound wave at each time step, depending on the frequence, one ouputing either the character, or a blank space. In this case the number of inputs steps is greater the the ouputs, for that we ue CTC, connectionnist temporal classification to reduce the output to the correct transcript (tttt ____ hh __ ee -> the) without having to give the correct labels at each time step, just the correct word (the).
 
-**Trigger Word Detection**
+#### Application: Trigger words
+
+**From audio recordings to spectrograms** Let's take the details of a system capable of detecting a triger word, in this example the trigger word is `activate` given positives, recordings of activate, and negatives recodings of other words, and background sound.
+
+What really is an audio recording? A microphone records little variations in air pressure over time, and it is these little variations in air pressure that your ear also perceives as sound. You can think of an audio recording is a long list of numbers measuring the little air pressure changes detected by the microphone. We will use audio sampled at 44100 Hz (or 44100 Hertz). This means the microphone gives us 44100 numbers per second. Thus, a 10 second audio clip is represented by 441000 numbers (= $10 \times 44100$).
+
+It is quite difficult to figure out from this "raw" representation of audio whether the word "activate" was said. In  order to help your sequence model more easily learn to detect triggerwords, we will compute a *spectrogram* of the audio. The spectrogram tells us how much different frequencies are present in an audio clip at a moment in time.
+
+A spectrogram is computed by sliding a window over the raw audio signal, and calculates the most active frequencies in each window using a Fourier transform.
+
+The spectogram represents how active each frequency is (y axis) over a number of time-steps (x axis).
+
+<img src="figures/spectogram.png" width="400">
+Spectrogram of an audio recording, where the color shows the degree to which different frequencies are present (loud) in the audio at different points in time. Green squares means a certain frequency is more active or more present in the audio clip (louder); blue squares denote less active frequencies. 
+
+The dimension of the output spectrogram depends upon the hyperparameters of the spectrogram software and the length of the input. Given 10 second audio clips as the "standard length" for the training examples. The number of timesteps of the spectrogram will be 5511, so $T_x = 5511$.
+
+With 10 seconds being the default training example length, 10 seconds of time can be discretized to different numbers of value. With 441000 hz (raw audio) and 5511 (spectrogram). In the former case, each step represents $10/441000 \approx 0.000023$ seconds. In the second case, each step represents $10/5511 \approx 0.0018$ seconds. 
+
+For the 10sec of audio:
+
+- $441000$ (raw audio)
+- 10000 used to synthesize audio
+- $5511 = T_x$ (spectrogram output, and dimension of input to the neural network). 
+- $1375 = T_y$ (the number of steps in the output of the GRU). 
+
+Each of these representations correspond to exactly 10 seconds of time. It's just that they are discretizing them to different degrees. All of these are hyperparameters and can be changed (except the 441000, which is a function of the microphone). We have chosen values that are within the standard ranges uses for speech systems. 
+
+Consider the $T_y = 1375$ number above. This means that for the output of the model, we discretize the 10s into 1375 time-intervals (each one of length $10/1375 \approx 0.0072$s) and try to predict for each of these intervals whether someone recently finished saying "activate."
+
+Consider also the 10000 number above. This corresponds to discretizing the 10sec clip into 10/10000 = 0.001 second itervals. it means we are using 10,000 steps. To be used to generate training examples.
+
+**Generating a single training example**: Because speech data is hard to acquire and label, it is better to synthesize the training data using the audio clips of activates, negatives, and backgrounds. It is quite slow to record lots of 10 second audio clips with random "activates" in it. Instead, it is easier to record lots of positives and negative words, and record background noise separately (or download background noise from free online sources).
+
+To synthesize a single training example:
+
+- Pick a random 10 second background audio clip
+- Randomly insert 0-4 audio clips of "activate" into this 10sec clip
+- Randomly insert 0-2 audio clips of negative words into this 10sec clip
+
+Because we synthesized the word "activate" into the background clip, we know exactly when in the 10sec clip the "activate" makes its appearance. Given that $y^{\langle t \rangle}$ represent whether or not someone has just finished saying "activate." Given a background clip, we can initialize $y^{\langle t \rangle}=0$ for all $t$, since the clip doesn't contain any "activates.", When we insert or overlay an "activate" clip, we will also update labels for $y^{\langle t \rangle}$, so that 50 steps (50 steps because we would be quite satisfied if the GRU detects "activate" anywhere within a short time-internal after finishing saying activate moment) of the output now have target label 1. And we will train a GRU to detect when someone has *finished* saying "activate".
+
+#### Model
+
+<img src="figures/model_triger_words.png" width="550">
+
+One key step of this model is the 1D convolutional step. It inputs the 5511 step spectrogram, and outputs a 1375 step output, which is then further processed by multiple layers to get the final $T_y = 1375$ step output. This layer plays a role similar to the 2D convolutions you saw in CNNs, of extracting low-level features and then possibly generating an output of a smaller dimension. 
+
+Computationally, the 1-D conv layer also helps speed up the model because now the GRU  has to process only 1375 timesteps rather than 5511 timesteps. The two GRU layers read the sequence of inputs from left to right, then ultimately uses a dense+sigmoid layer to make a prediction for $y^{\langle t \rangle}$. Because $y$ is binary valued (0 or 1), we use a sigmoid output at the last layer to estimate the chance of the output being 1, corresponding to the user having just said "activate."
+
+Note that we use a uni-directional RNN rather than a bi-directional RNN. This is really important for trigger word detection, since we want to be able to detect the trigger word almost immediately after it is said. If we used a bi-directional RNN, we would have to wait for the whole 10sec of audio to be recorded before we could tell if "activate" was said in the first second of the audio clip.  
