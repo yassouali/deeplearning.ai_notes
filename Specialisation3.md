@@ -9,12 +9,12 @@ In machine learning, we have the following assumption:
 
 * Fit training set on cost fucntion.
 * Fit dev set well on cost function.
-* Fit test set well on const function.
+* Fit test set well on cost function.
 * Performs well in the real world.
 
-For each one of the assumption, we have a set of techniques specific to each one, and only one of them, like a bigger network of fitting the train set or regularization for fitting the dev set, but we must not combine different ones, if so adjusting for one assumption without affecting the rest becomes quit difficult. Like early stopping, which can affect both fitting the train and dev set.
+For each one of these assumptions, we have a set of techniques specific to each one, and only one of them, like a bigger network for fitting the train set or regularization for fitting the dev set, but we must not combine different ones, if so adjusting for one assumption without affecting the rest becomes quit difficult. Like early stopping, which can affect both fitting the train and dev set.
 
-Another instance of orthogonalization:$
+Another instance of orthogonalization:
 1. Define a metric to evaluate the model.
 2. Worry separately about how to do well on this metric.
 
@@ -31,13 +31,13 @@ Splitting: Given that the data sets in the deep learning era are much bigger, it
 
 ### Comparing to human-level performance
 
-The model performences can increase rapidly until achieving human like performances, and then the slop of progress becomes very small and we beome close to the bayes optimal error, but so long as ML is worse than humans we can, we can get labeled data from humans, gain insight from manual error analysis, and apply a better analysis of bias/variance. 
+The model performences can increase rapidly until achieving human like performances, and then the slop of progress becomes very small and we beome close to the bayes optimal error, but so long as the model's performance is worse than humans, we can get labeled data from humans, gain insight from manual error analysis, and apply a better analysis of bias/variance. 
 
 Sometimes, even with a very good model, we can't get to 100% performance, given that for some examples, we might have a high degree of noise that we can't make a correct classification; this is the bayes optimal error: Bayes error is the lowest possible prediction error that can be achieved and is the same as irreducible error. If one would know exactly what process generates the data, then errors will still be made if the process is random. This is also what is meant by "y is inherently stochastic".
 
-*The avoidable bias:* difference of error between  human level performance and training set, can be reduced using a bigger model, training the model for longer, better optimization algorithm, better NN architecture
+- *The avoidable bias:* difference of error between human level performance and training set, can be reduced using a bigger model, training the model for longer, better optimization algorithm, better NN architecture.
 
-*Variance:* the error difference between the train and dev set, can be reduced using more data, regularization techniques or hyperparameters search.
+- *Variance:* the error difference between the train and dev set, can be reduced using more data, regularization techniques or hyperparameters search.
 
 Two fundamental assumptions of supervised learning:
 
@@ -49,9 +49,9 @@ ___
 ## WEEK 2
 
 ### Error analysis
-We start with the simplest possible algorithm to avoid premature otimization, one that we can implement quickly, after implementing it and testing it on the cross-validation set we plot Learning Curves to decide if more data features is likely to help, after that we can do Bias/Variance analysis and *Error Analysis*:
+We start with the simplest possible algorithm to avoid premature optimization, one that we can implement quickly, after implementing it and testing it on the cross-validation set, we plot Learning Curves to decide if more data features is likely to help, after that we can do Bias/Variance analysis and *Error Analysis*:
 
-* Manually examining the examples (in the CV set) that the algorithm misclassified.
+* Manually examining the examples (in the Cross-Validation set) that the algorithm misclassified.
 * See if we spot any systematic trend in what types of examples it makes errors on.
 
 Manually examining mistakes that the algorithm is making can give us insights into what to do next. This process is called error analysis. Take for example, we built a cat classifier showing 10% test error and observe that the algorithm was misclassifying dog images as cats. Should we try to make the cat classifier do better on dogs?
@@ -63,9 +63,9 @@ Manually examining mistakes that the algorithm is making can give us insights in
 3. If we only have 5% dog pictures and you solve this problem completely, the error will only go down from 10% to 9.5%, max!
 4. If, in contrast, we have 50% dog pictures, you can be more optimistic about improving your error and hopefully reduce it from 10% to 5%
 
-This is how we evaluate single idea of error fixing. In a similar fashion, you can evaluate multiple ideas by creating a grid and selecting the idea that best improves the performance.
+This is how we evaluate single idea of error fixing. In a similar fashion, we can evaluate multiple ideas by creating a grid and selecting the idea that best improves the performance.
 
-<img src="figures/error_analysis.png">
+<p align="center"> <img src="figures/error_analysis.png" width="600"> </p>
 
 Correcting incorrect dev/test set examples:
 
@@ -81,19 +81,19 @@ Example: we have 10,000 images of phone images of cats (target), and 100,000 one
 
 One problem this poses, is that we evaluate our model in a different distribution making it hard to do a variance/bias analysis. A possible solution is creating a new set, train-dev which has the same distribution as the train set :
 
-<img src="figures/traindev.png" width="350">
+<p align="center"> <img src="figures/traindev.png" width="350">  </p>
 
 Using this new partition, we can do our bias/variance analysis :
 
-<img src="figures/mismatch.png" width="350">
+<p align="center">  <img src="figures/mismatch.png" width="350">  </p>
 
 **Adressing data mismatch:**
-* Caeey out manual error analysis to try to understand difference between training and dev/test sets.
+* Cary out manual error analysis to try to understand the difference between training and dev/test sets.
 * Make training data more similar (artificial data synthesis), or collect more data similar to dev/test sets.
 
 ### Learning from multiple tasks
 
-**Transfer learning** a popular approach in deep learning where pre-trained models are used as the starting point on computer vision and natural language processing tasks given the vast compute and time resources required to develop neural network models on these problems and from the huge jumps in skill that they provide on related problems.
+**Transfer learning** is a popular approach in deep learning, where pre-trained models are used as the starting point on computer vision and natural language processing tasks, given the vast compute and time resources required to develop neural network models on these problems and from the huge jumps in skill that they provide on related problems.
 
 The three major Transfer Learning scenarios look as follows:
 
@@ -103,14 +103,14 @@ The three major Transfer Learning scenarios look as follows:
 
 **When and how to fine-tune?** This is a function of several factors, but the two most important ones are the size of the new dataset (small or big), and its similarity to the original dataset (e.g. ImageNet-like in terms of the content of images and the classes, or very different, such as microscope images).
 
-Transfer learning makes sense when:
+Transfer learning from Task A to B makes sense when:
 
 * Task A and B have the same input x.
 * We have a lot more data for Task A than Task B.
 * Low level features from A could be helpful for learning B.
 
 **Multitask learning**
-We typically care about optimizing for a particular metric, whether this is a score on a certain benchmark or a business KPI. In order to do this, we generally train a single model or an ensemble of models to perform our desired task. We then fine-tune and tweak these models until their performance no longer increases. While we can generally achieve acceptable performance this way, by being laser-focused on our single task, we ignore information that might help us do even better on the metric we care about. Specifically, this information comes from the training signals of related tasks. By sharing representations between related tasks, we can enable our model to generalize better on our original task. This approach is called Multi-Task Learning (MTL)
+We typically care about optimizing for a particular metric, whether this is a score on a certain benchmark or a business Key Performance Indicator (KPI). In order to do this, we generally train a single model or an ensemble of models to perform our desired task. We then fine-tune and tweak these models until their performance no longer increases. While we can generally achieve acceptable performance this way, by being laser-focused on our single task, we ignore information that might help us do even better on the metric we care about. Specifically, this information comes from the training signals of related tasks. By sharing representations between related tasks, we can enable our model to generalize better on our original task. This approach is called Multi-Task Learning (MTL).
 
 When multi-task learning makes sense:
 
@@ -133,7 +133,7 @@ End-to-end learning system tend to do better when there is a lot of labeled data
 
 Speech recognition example:
 
-<img src="figures/speech_rec.png">
+<p align="center"> <img src="figures/speech_rec.png" width="600"> </p>
 
 Pros of end-to-end deep learning:
 
@@ -143,4 +143,4 @@ Pros of end-to-end deep learning:
 Cons :
 
 * May need large amount of data
-* Excludes potenrially useful hand-designed components.
+* Excludes potentially useful hand-designed components.
