@@ -497,11 +497,11 @@ In system A, we have two matches: 2-gram match (Israeli officials) and 1-gram ma
 <p align="center"><img src="figures/blue_example.png" width="350"></p>
 
 ### Attention model
-Until now, we've been using a Encoder-Decoder architecture for machine translation. Where one RNN reads in a sentence and then different one outputs a sentence. There's a modification to this called the Attention Model, that makes all this work much better.
+Until now, we've been using an Encoder-Decoder architecture for machine translation. Where one RNN reads in a sentence and then a different one outputs a sentence. There's a modification of this called the Attention Model, that makes all this work much better.
 
-The simple encoder and decoder models, works quite well with small sentences, but the blue score deacreases quite rapidly when the sentences are longer.
+The simple encoder-decoder models work quite well with small sentences, but the blue score deacreases quite rapidly when the sentences are longer.
 
-Instead of using the output vector of the last word, we can use the output vectors of all words. However, this becomes tricky because now instead of a fixed length vector we are dealing with a variable dimension matrix i.e we have a vector for each word of the sequence.
+The main idea of attention models is that instead of using the output vector of the last word, we can use the output vectors of all words. However, this becomes tricky because now instead of a fixed length vector we are dealing with a variable dimension matrix, i.e we have a vector for each word of the sequence.
 
 So, the better approach would be to aggregate the word vectors into a fixed length vector based on some context. Attention Model is just a way of doing the aggregation. It provides a recipe for aggregating the output vectors of each word into a single vector based on some context. in the context of machine translation, the translated word at position t is dependent on the aggregation of all output vector of the input sequence. In this way, the network can choose what words are important and use information only from those words to construct the fixed length vector / pay attention only to a part of the input system.
 
