@@ -105,6 +105,10 @@ $$ db = \sum_h \sum_w dZ_{hw}$$
 
 As you have previously seen in basic neural networks, db is computed by summing $dZ$. In this case, you are just summing over all the gradients of the conv output (Z) with respect to the cost.
 
+Here is a more infomative picture for computing the gradients with respect to the weights (source)[https://becominghuman.ai/back-propagation-in-convolutional-neural-networks-intuition-and-code-714ef1c38199]: 
+
+<img src="https://cdn-images-1.medium.com/max/2000/1*CkzOyjui3ymVqF54BR6AOQ.gif">
+
 ___
 ## WEEK 2
 
