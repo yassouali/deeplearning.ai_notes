@@ -54,7 +54,7 @@ When adding regularization, we'll have cost function and back prop by adding the
 
 ##### Dropout
 
-It randomly shuts down some neurons in each iteration. At each iteration, we shut down (set to zero) each neuron of a layer with probability (1−keep_prob) or keep it with probability keep_prob. When we shut some neurons down, we actually modify the model. The idea behind drop-out is that at each iteration, we train a different model that uses only a subset of the neurons. With dropout, the neurons thus become less sensitive to the activation of one other specific neuron, because that other neuron might be shut down at any time.
+It randomly shuts down some neurons in each iteration from one layer to the next. At each iteration, we shut down (set to zero) each neuron of the privious layer with probability (1−keep_prob) or keep it with probability keep_prob. When we shut some neurons down, we actually modify the model. The idea behind drop-out is that at each iteration, we train a different model that uses only a subset of the neurons. With dropout, the neurons thus become less sensitive to the activation of one other specific neuron, because that other neuron might be shut down at any time.
 
 Implementing Dropout, called inverted dropout, create a matix Dl for a given layer l, where each element coresponds to an activation in layer l of the matrix of activations Al, each element is random values, if this random values is less than keep_prob, then if will be assgined 1, we multiply the two and then devide by the keep_prob to have the same original scale. One down side of dropout, it that the cost function becomes not defined.
 
@@ -121,6 +121,10 @@ Given that for each new value, we're averaging over all the past values, we can 
 <p align="center"> <img src="figures/weighted_avg.png" width="400"> </p>
 
 When we start, we have V0 = 0, so the first weighted averages are not corresponding to the correct values, and it takes a number of iterations to get to the correct averages, for that we can apply bias correction, $\frac{V_t}{1- \beta^t}$. As seen also later in RNN assignement, we can choose a value to assign to the loss V0, like for character level generation : `-np.log(1.0/vocab_size)*seq_length` and then use this first values to smooth the loss with exponenetially weighted average: `loss * 0.999 + cur_loss * 0.001`.
+
+Side note (source)[https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html]:
+
+<p align="center"> <img src="figures/smoothed_loss.png"> </p>
 
 ### Momentum
 Because mini-batch gradient descent makes a parameter update after seeing just a subset of examples, the direction of the update has some variance, and so the path taken by mini-batch gradient descent will "oscillate" toward convergence. Using momentum can reduce these oscillations. 
