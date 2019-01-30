@@ -122,9 +122,9 @@ Given that for each new value, we're averaging over all the past values, we can 
 
 When we start, we have V0 = 0, so the first weighted averages are not corresponding to the correct values, and it takes a number of iterations to get to the correct averages, for that we can apply bias correction, $\frac{V_t}{1- \beta^t}$. As seen also later in RNN assignement, we can choose a value to assign to the loss V0, like for character level generation : `-np.log(1.0/vocab_size)*seq_length` and then use this first values to smooth the loss with exponenetially weighted average: `loss * 0.999 + cur_loss * 0.001`.
 
-Side note (source)[https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html]:
+Side note [source](https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html):
 
-<p align="center"> <img src="figures/smoothed_loss.png"> </p>
+<p align="center"> <img src="figures/smoothed_loss.png" width="700"> </p>
 
 ### Momentum
 Because mini-batch gradient descent makes a parameter update after seeing just a subset of examples, the direction of the update has some variance, and so the path taken by mini-batch gradient descent will "oscillate" toward convergence. Using momentum can reduce these oscillations. 
