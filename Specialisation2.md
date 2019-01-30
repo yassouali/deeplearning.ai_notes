@@ -52,6 +52,27 @@ L2-regularization relies on the assumption that a model with small weights is si
 
 When adding regularization, we'll have cost function and back prop by adding the regularization term's gradient ($\frac{d}{dW} ( \frac{1}{2}\frac{\lambda}{m}  W^2) = \frac{\lambda}{m} W$).
 
+Side note [source](https://www.fast.ai/2018/07/02/adam-weight-decay/):
+
+These types of regulizers are nearly always implemented by adding `lambda * w` to the gradients, rather than actually changing the loss function, given that we don’t want to add more computations by modifying the loss when there is an easier way.
+
+So as a distinction:
+* Weight decay `final_loss = loss + wd * all_weights.pow(2).sum() / 2` 
+* L2 regularization, the one implemented in Deep learning frameworks: `w = w - lr * w.grad - lr * lambda * w` 
+
+L2 regularization and weight decay are the same when using vanilla SGD, but as soon as we add momentum, or use a more sophisticated optimizer like Adam, L2  become different than weight decay. For momentum, using L2 regularization consists in adding `lambda * w` to the gradients (as we saw earlier) but the gradients aren’t subtracted from the weights directly. First we compute a moving average:
+```
+moving_avg = alpha * moving_avg + (1-alpha) * (w.grad + lambda * w)
+```
+and it’s this moving average that will be multiplied by the learning rate and subtracted from w. So the part linked to the regularization that will be taken from w is `lr* (1-alpha) * lambda * w` plus a combination of the previous weights that were already in `moving_avg`.
+
+On the other hand, weight decay’s update will look like:
+```
+moving_avg = alpha * moving_avg + (1-alpha) * w.grad 
+w = w - lr * moving_avg - lr * lambda * w
+```
+We can see that the part subtracted from w linked to regularization isn’t the same in the two methods. When using the Adam optimizer, it gets even more different: in the case of L2 regularization we add this `wd*w` to the gradients then compute a moving average of the gradients and their squares before using both of them for the update. Whereas the weight decay method simply consists in doing the update, then subtract to each weight.
+
 ##### Dropout
 
 It randomly shuts down some neurons in each iteration from one layer to the next. At each iteration, we shut down (set to zero) each neuron of the privious layer with probability (1−keep_prob) or keep it with probability keep_prob. When we shut some neurons down, we actually modify the model. The idea behind drop-out is that at each iteration, we train a different model that uses only a subset of the neurons. With dropout, the neurons thus become less sensitive to the activation of one other specific neuron, because that other neuron might be shut down at any time.
