@@ -57,23 +57,15 @@ A Recurrent neural network can also be seen as the repetition of a single cell. 
 
 **Forward propagation :**
 
-<img src="https://latex.codecogs.com/gif.latex?$$a&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;a&space;a&space;}&space;a&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;W&space;_&space;{&space;a&space;x&space;}&space;x&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;b&space;_&space;{&space;a&space;}&space;\right)$$
-" title="$$a ^ { < t > } = g \left( W _ { a a } a ^ { < t > } + W _ { a x } x ^ { < t > } + b _ { a } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$a&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;a&space;a&space;}&space;a&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;W&space;_&space;{&space;a&space;x&space;}&space;x&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;b&space;_&space;{&space;a&space;}&space;\right)$$" title="$$a ^ { < t > } = g \left( W _ { a a } a ^ { < t > } + W _ { a x } x ^ { < t > } + b _ { a } \right)$$" />
 
-<img src="https://latex.codecogs.com/gif.latex?$$\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;y&space;a&space;}&space;a&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;b&space;_&space;{&space;y&space;}&space;\right)$$
-" title="$$\hat { y } ^ { < t > } = g \left( W _ { y a } a ^ { < t > } + b _ { y } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;y&space;a&space;}&space;a&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;b&space;_&space;{&space;y&space;}&space;\right)$$" title="$$\hat { y } ^ { < t > } = g \left( W _ { y a } a ^ { < t > } + b _ { y } \right)$$" />
 
 To simplify the notation:
 
-<img src="https://latex.codecogs.com/gif.latex?$$a&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;w&space;_&space;{&space;a&space;}&space;\left[&space;a&space;^&space;{&space;(&space;t&space;-&space;1&space;)&space;}&space;,&space;x&space;^&space;{&space;(&space;t&space;)&space;}&space;\right]&space;&plus;&space;b&space;_&space;{&space;a&space;}&space;\right)$$
-" title="$$a ^ { < t > } = g \left( w _ { a } \left[ a ^ { ( t - 1 ) } , x ^ { ( t ) } \right] + b _ { a } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$a&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;w&space;_&space;{&space;a&space;}&space;\left[&space;a&space;^&space;{&space;(&space;t&space;-&space;1&space;)&space;}&space;,&space;x&space;^&space;{&space;(&space;t&space;)&space;}&space;\right]&space;&plus;&space;b&space;_&space;{&space;a&space;}&space;\right)$$" title="$$a ^ { < t > } = g \left( w _ { a } \left[ a ^ { ( t - 1 ) } , x ^ { ( t ) } \right] + b _ { a } \right)$$" />
 
-<img src="https://latex.codecogs.com/gif.latex?$$\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;y}&space;a&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;b&space;_&space;{&space;y&space;}&space;\right)$$
-" title="$$\hat { y } ^ { < t > } = g \left( W _ { y} a ^ { < t > } + b _ { y } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;y}&space;a&space;^&space;{&space;<&space;t&space;>&space;}&space;&plus;&space;b&space;_&space;{&space;y&space;}&space;\right)$$" title="$$\hat { y } ^ { < t > } = g \left( W _ { y} a ^ { < t > } + b _ { y } \right)$$" />
 
 For a 10,000 input vector and a hidden state of size 100, Wax is of size (10,000 x 100) and Waa is of size (100 x 100), we denote by Wa = [ Waa | Wax ], a matrix of size (100 x 10,100) where we stack both matrices and Waa Wax. and [a\<t-1\>, x\<t\>] as a vector of size 10,100.
 
