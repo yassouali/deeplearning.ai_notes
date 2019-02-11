@@ -25,8 +25,8 @@ So, in summary:
 - Superscript <img src="https://latex.codecogs.com/gif.latex?$(i)$" title="$(i)$" /> denotes an object associated with the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> example. 
     - Example: <img src="https://latex.codecogs.com/gif.latex?$x^{(i)}$" title="$x^{(i)}$" /> is the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> training example input.
 
-- Superscript t <img src="https://latex.codecogs.com/gif.latex?$\langlet" title="$\langlet" /> denotes an object at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. 
-    - Example: t <img src="https://latex.codecogs.com/gif.latex?$x^{\langlet" title="$x^{\langlet" /> is the input x at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. t <img src="https://latex.codecogs.com/gif.latex?$x^{(i)\langlet" title="$x^{(i)\langlet" /> is the input at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> timestep of example    
+- Superscript t <img src="https://latex.codecogs.com/gif.latex?$\langle&space;t&space;\rangle$" title="$\langle t \rangle$" /> denotes an object at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. 
+    - Example: t <img src="https://latex.codecogs.com/gif.latex?$x^{\langle&space;t&space;\rangle}$" title="$x^{\langle t \rangle}$" /> is the input x at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. t <img src="https://latex.codecogs.com/gif.latex?$x^{(i)\langle&space;t&space;\rangle}$" title="$x^{(i)\langle t \rangle}$" /> is the input at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> timestep of example    
 - Lowerscript <img src="https://latex.codecogs.com/gif.latex?$i$" title="$i$" /> denotes the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> entry of a vector.
     - Example: <img src="https://latex.codecogs.com/gif.latex?$a^{[l]}_i$" title="$a^{[l]}_i$" /> denotes the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> entry of the activations in layer
 How to represent individual words in the sentence? first we choose a dictonnary containing all the words we're interested in, and then use one hot representation to represent the words in the input sequence. If we encountered words not in the dictionnary, we represent the word as \<unk\> token.
@@ -106,7 +106,7 @@ In most cases, the size of the input sequence Tx is different than the ouput seq
 
 ### Language modeling
 
-Language Modeling and LM for short, is the development of probabilistic models that are able to predict the next word in the sequence given the words that precede it. A statistical language model is a probability distribution over sequences of words. Given such a sequence, say of length m, it assigns a probability <img src="https://latex.codecogs.com/gif.latex?$P(w_{1},\ldots" title="$P(w_{1},\ldots" /> to the whole sequence. Having a way to estimate the relative likelihood of different phrases is useful in many natural language processing applications, especially ones that generate text as an output.
+Language Modeling and LM for short, is the development of probabilistic models that are able to predict the next word in the sequence given the words that precede it. A statistical language model is a probability distribution over sequences of words. Given such a sequence, say of length m, it assigns a probability <img src="https://latex.codecogs.com/gif.latex?$P(w_{1},\ldots&space;,w_{m})$" title="$P(w_{1},\ldots ,w_{m})$" /> to the whole sequence. Having a way to estimate the relative likelihood of different phrases is useful in many natural language processing applications, especially ones that generate text as an output.
 
 *Language modeling is the task of assigning a probability to sentences in a language. […] Besides assigning a probability to each sequence of words, the language models also assigns a probability for the likelihood of a given word (or a sequence of words) to follow a sequence of words.* Neural Network Methods in Natural Language Processing, 2017.
 
@@ -174,7 +174,7 @@ For the sake of this illustration, lets assume we are reading words in a piece o
 
 <img src="https://latex.codecogs.com/gif.latex?$$\Gamma_f^{\langle&space;t&space;\rangle}&space;=&space;\sigma(W_f[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]&space;&plus;&space;b_f)$$" title="$$\Gamma_f^{\langle t \rangle} = \sigma(W_f[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_f)$$" />
 
-Here, <img src="https://latex.codecogs.com/gif.latex?$W_f$" title="$W_f$" /> are weights that govern the forget gate's behavior. We concatenate t-1 \rangle}, x^{\langle t <img src="https://latex.codecogs.com/gif.latex?$[a^{\langlet-1\rangle},x^{\langlet" title="$[a^{\langlet-1\rangle},x^{\langlet" /> and multiply by The equation above results in a vector t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_f^{\langlet" title="$\Gamma_f^{\langlet" /> with values between 0 and 1. This forget gate vector will be multiplied element-wise by the previous cell state t-1 \rangle}$. So if one of the values of t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_f^{\langlet" title="$\Gamma_f^{\langlet" /> is 0 (or close to 0) then it means that the LSTM should remove that piece of information (e.g. the singular subject) in the corresponding component of t-1 \rangle}$. If one of the values is 1, then it will keep the information. 
+Here, <img src="https://latex.codecogs.com/gif.latex?$W_f$" title="$W_f$" /> are weights that govern the forget gate's behavior. We concatenate t-1 \rangle}, x^{\langle t <img src="https://latex.codecogs.com/gif.latex?$[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]$" title="$[a^{\langle t-1 \rangle}, x^{\langle t \rangle}]$" /> and multiply by The equation above results in a vector t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_f^{\langle&space;t&space;\rangle}$" title="$\Gamma_f^{\langle t \rangle}$" /> with values between 0 and 1. This forget gate vector will be multiplied element-wise by the previous cell state t-1 \rangle}$. So if one of the values of t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_f^{\langle&space;t&space;\rangle}$" title="$\Gamma_f^{\langle t \rangle}$" /> is 0 (or close to 0) then it means that the LSTM should remove that piece of information (e.g. the singular subject) in the corresponding component of t-1 \rangle}$. If one of the values is 1, then it will keep the information. 
 
 #### - Update gate
 
@@ -182,7 +182,7 @@ Once we forget that the subject being discussed is singular, we need to find a w
 
 <img src="https://latex.codecogs.com/gif.latex?$$\Gamma_u^{\langle&space;t&space;\rangle}&space;=&space;\sigma(W_u[a^{\langle&space;t-1&space;\rangle},&space;x^{\{t\}}]&space;&plus;&space;b_u)$$&space;" title="$$\Gamma_u^{\langle t \rangle} = \sigma(W_u[a^{\langle t-1 \rangle}, x^{\{t\}}] + b_u)$$ " />
 
-Similar to the forget gate, here t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_u^{\langlet" title="$\Gamma_u^{\langlet" /> is again a vector of values between 0 and 1. This will be multiplied element-wise with t \rangle}$, in order to compute t \rangle}$.
+Similar to the forget gate, here t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_u^{\langle&space;t&space;\rangle}$" title="$\Gamma_u^{\langle t \rangle}$" /> is again a vector of values between 0 and 1. This will be multiplied element-wise with t \rangle}$, in order to compute t \rangle}$.
 
 #### - Updating the cell 
 
@@ -218,16 +218,16 @@ The LSTM backward pass is slighltly more complicated than the forward one. We ha
 
 <p align="center"><img src="figures/lstm_param_deriv.png"></p>
 
-To calculate db_u, db_c, <img src="https://latex.codecogs.com/gif.latex?$db_f,db_u,db_c," title="$db_f,db_u,db_c," /> we just need to sum across the horizontal (axis= 1) axis on t \rangle}, d\Gamma_u^{\langle t \rangle}, d\tilde c^{\langle t \rangle}, d\Gamma_o^{\langle t <img src="https://latex.codecogs.com/gif.latex?$d\Gamma_f^{\langlet\rangle},d\Gamma_u^{\langlet\rangle},d\tildec^{\langlet\rangle},d\Gamma_o^{\langlet" title="$d\Gamma_f^{\langlet\rangle},d\Gamma_u^{\langlet\rangle},d\tildec^{\langlet\rangle},d\Gamma_o^{\langlet" /> respectively. This is done beacuse in the forward pas an automatic broadcasting was perfomed.
+To calculate db_u, db_c, <img src="https://latex.codecogs.com/gif.latex?$db_f,&space;db_u,&space;db_c,&space;db_o$" title="$db_f, db_u, db_c, db_o$" /> we just need to sum across the horizontal (axis= 1) axis on t \rangle}, d\Gamma_u^{\langle t \rangle}, d\tilde c^{\langle t \rangle}, d\Gamma_o^{\langle t <img src="https://latex.codecogs.com/gif.latex?$d\Gamma_f^{\langle&space;t&space;\rangle},&space;d\Gamma_u^{\langle&space;t&space;\rangle},&space;d\tilde&space;c^{\langle&space;t&space;\rangle},&space;d\Gamma_o^{\langle&space;t&space;\rangle}$" title="$d\Gamma_f^{\langle t \rangle}, d\Gamma_u^{\langle t \rangle}, d\tilde c^{\langle t \rangle}, d\Gamma_o^{\langle t \rangle}$" /> respectively. This is done beacuse in the forward pas an automatic broadcasting was perfomed.
 
 Finally, we will compute the derivative with respect to the previous hidden state, previous memory state, and input.
 
 <img src="https://latex.codecogs.com/gif.latex?$$&space;da_{prev}&space;=&space;W_f^T*d\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;W_u^T&space;*&space;d\Gamma_u^{\langle&space;t&space;\rangle}&plus;&space;W_c^T&space;*&space;d\tilde&space;c^{\langle&space;t&space;\rangle}&space;&plus;&space;W_o^T&space;*&space;d\Gamma_o^{\langle&space;t&space;\rangle}$$" title="$$ da_{prev} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c^{\langle t \rangle} + W_o^T * d\Gamma_o^{\langle t \rangle}$$" />
-Here, the weights for equations 13 are the first n_a, (i.e. = <img src="https://latex.codecogs.com/gif.latex?$W_f=" title="$W_f=" /> etc...)
+Here, the weights for equations 13 are the first n_a, (i.e. = <img src="https://latex.codecogs.com/gif.latex?$W_f&space;=&space;W_f[:n_a,:]$" title="$W_f = W_f[:n_a,:]$" /> etc...)
 
 <img src="https://latex.codecogs.com/gif.latex?$$&space;dc_{prev}&space;=&space;dc_{next}\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;\Gamma_o^{\langle&space;t&space;\rangle}&space;*&space;(1-&space;\tanh(c_{next})^2)*\Gamma_f^{\langle&space;t&space;\rangle}*da_{next}$$" title="$$ dc_{prev} = dc_{next}\Gamma_f^{\langle t \rangle} + \Gamma_o^{\langle t \rangle} * (1- \tanh(c_{next})^2)*\Gamma_f^{\langle t \rangle}*da_{next}$$" />
 <img src="https://latex.codecogs.com/gif.latex?$$&space;dx^{\langle&space;t&space;\rangle}&space;=&space;W_f^T*d\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;W_u^T&space;*&space;d\Gamma_u^{\langle&space;t&space;\rangle}&plus;&space;W_c^T&space;*&space;d\tilde&space;c_t&space;&plus;&space;W_o^T&space;*&space;d\Gamma_o^{\langle&space;t&space;\rangle}$$" title="$$ dx^{\langle t \rangle} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c_t + W_o^T * d\Gamma_o^{\langle t \rangle}$$" />
-where the weights for equation 15 are from n_a to the end, (i.e. = <img src="https://latex.codecogs.com/gif.latex?$W_f=" title="$W_f=" /> etc...)
+where the weights for equation 15 are from n_a to the end, (i.e. = <img src="https://latex.codecogs.com/gif.latex?$W_f&space;=&space;W_f[n_a:,:]$" title="$W_f = W_f[n_a:,:]$" /> etc...)
 
 
 
@@ -353,8 +353,8 @@ where:
 * V is the size of the vocabulary,
 * X denotes the word co-occurrence matrix (so <img src="https://latex.codecogs.com/gif.latex?$X_{i,j}$" title="$X_{i,j}$" /> is the number of times that word j occurs in the context of word i)
 * <img src="https://latex.codecogs.com/gif.latex?$X_{i,j}$" title="$X_{i,j}$" /> = # times i appears in the context of j, <img src="https://latex.codecogs.com/gif.latex?$X_{i,j}$" title="$X_{i,j}$" /> can be symetric if the context is a window.
-* the weighting f is given by = (x / <img src="https://latex.codecogs.com/gif.latex?$f(x)=(x/" title="$f(x)=(x/" /> if < <img src="https://latex.codecogs.com/gif.latex?$x<" title="$x<" /> and 1 otherwise, to avoid doing the computation when Xi,j = 0
-* <img src="https://latex.codecogs.com/gif.latex?$x_{\text{max}}$" title="$x_{\text{max}}$" /> = 100 and = <img src="https://latex.codecogs.com/gif.latex?$\alpha=" title="$\alpha=" /> (determined empirically),
+* the weighting f is given by = (x / <img src="https://latex.codecogs.com/gif.latex?$f(x)&space;=&space;(x&space;/&space;x_{\text{max}})^\alpha$" title="$f(x) = (x / x_{\text{max}})^\alpha$" /> if < <img src="https://latex.codecogs.com/gif.latex?$x&space;<&space;x_{\text{max}}$" title="$x < x_{\text{max}}$" /> and 1 otherwise, to avoid doing the computation when Xi,j = 0
+* <img src="https://latex.codecogs.com/gif.latex?$x_{\text{max}}$" title="$x_{\text{max}}$" /> = 100 and = <img src="https://latex.codecogs.com/gif.latex?$\alpha&space;=&space;0.75$" title="$\alpha = 0.75$" /> (determined empirically),
 * <img src="https://latex.codecogs.com/gif.latex?$e_j$" title="$e_j$" /> are the two layers of word vectors,
 * <img src="https://latex.codecogs.com/gif.latex?$b_j$" title="$b_j$" /> are bias terms.
 
@@ -382,7 +382,7 @@ A possible solutions is to use many-to-one RNN network and give the word embeddi
 
 Word embeddings can reflect gender, ethnicity... and other biases of the text used to train the model, How to adress these biases in word embeddings?
 
-1. Identify bias direction, using - e_{she}$, - <img src="https://latex.codecogs.com/gif.latex?$e_{male}-" title="$e_{male}-" /> ..., to find the direction of bias (can be 1D or higher).
+1. Identify bias direction, using - e_{she}$, - <img src="https://latex.codecogs.com/gif.latex?$e_{male}&space;-&space;e_{female}$" title="$e_{male} - e_{female}$" /> ..., to find the direction of bias (can be 1D or higher).
 2. Neutralize: for every word that is not definitional, project to get rid of bias.
 3. Equalise pairs.
 
@@ -499,13 +499,13 @@ The main idea of attention models is that instead of using the output vector of 
 
 So, the better approach would be to aggregate the word vectors into a fixed length vector based on some context. Attention Model is just a way of doing the aggregation. It provides a recipe for aggregating the output vectors of each word into a single vector based on some context. in the context of machine translation, the translated word at position t is dependent on the aggregation of all output vector of the input sequence. In this way, the network can choose what words are important and use information only from those words to construct the fixed length vector / pay attention only to a part of the input system.
 
-<img src="https://latex.codecogs.com/gif.latex?$\alpha^{<t," title="$\alpha^{<t," /> = amount of attention <img src="https://latex.codecogs.com/gif.latex?$y^{t}$" title="$y^{t}$" /> should pay to
+<img src="https://latex.codecogs.com/gif.latex?$\alpha^{<t,&space;t^\prime>}$" title="$\alpha^{<t, t^\prime>}$" /> = amount of attention <img src="https://latex.codecogs.com/gif.latex?$y^{t}$" title="$y^{t}$" /> should pay to
 <p align="center"><img src="figures/attention.png" width="450"></p>
 
 For a bidirectionnal RNN, each activation contains the forward and backward componenet :
 <img src="https://latex.codecogs.com/gif.latex?$$a&space;^&space;{&space;<t^\prime>&space;}&space;=&space;(&space;\vec{a}^{<t>}&space;,&space;a^{<t^\prime>})$$" title="$$a ^ { <t^\prime> } = ( \vec{a}^{<t>} , a^{<t^\prime>})$$" />
 
-And then the context is computed as a weighted sum of the activation given the attention weights _ { t } \alpha ^ { < 1 , t ^ { \prime } > } = <img src="https://latex.codecogs.com/gif.latex?$\sum_{t}\alpha^{<1,t^{\prime}>}=" title="$\sum_{t}\alpha^{<1,t^{\prime}>}=" /> (here for the first ouput, t = 1):
+And then the context is computed as a weighted sum of the activation given the attention weights _ { t } \alpha ^ { < 1 , t ^ { \prime } > } = <img src="https://latex.codecogs.com/gif.latex?$\sum&space;_&space;{&space;t&space;}&space;\alpha&space;^&space;{&space;<&space;1&space;,&space;t&space;^&space;{&space;\prime&space;}&space;>&space;}&space;=&space;1$" title="$\sum _ { t } \alpha ^ { < 1 , t ^ { \prime } > } = 1$" /> (here for the first ouput, t = 1):
 
 <img src="https://latex.codecogs.com/gif.latex?$$c&space;^&space;{&space;(&space;1&space;)&space;}&space;=&space;\sum&space;_&space;{&space;t&space;^&space;{&space;\prime&space;}&space;}&space;\alpha&space;^&space;{&space;<&space;1&space;,&space;t&space;>&space;}&space;a&space;^&space;{&space;\left\langle&space;t&space;^&space;{&space;\prime&space;}&space;\right\rangle&space;}$$" title="$$c ^ { ( 1 ) } = \sum _ { t ^ { \prime } } \alpha ^ { < 1 , t > } a ^ { \left\langle t ^ { \prime } \right\rangle }$$" />
 
@@ -517,7 +517,7 @@ One problem is the quadratic loss, where the number of weights is Tx * Ty, in ma
 
 
 
-**Illustration of Attention mechanism**: Here is a  more detailed illustration of the attenstion mecanism. The diagram on the left shows the attention model. The diagram on the right shows what one "Attention" step does to calculate the attention variables t, t' \rangle}$, which are used to compute the context variable t <img src="https://latex.codecogs.com/gif.latex?$context^{\langlet" title="$context^{\langlet" /> for each timestep in the output ($t=1, \ldots, T_y$).
+**Illustration of Attention mechanism**: Here is a  more detailed illustration of the attenstion mecanism. The diagram on the left shows the attention model. The diagram on the right shows what one "Attention" step does to calculate the attention variables t, t' \rangle}$, which are used to compute the context variable t <img src="https://latex.codecogs.com/gif.latex?$context^{\langle&space;t&space;\rangle}$" title="$context^{\langle t \rangle}$" /> for each timestep in the output ($t=1, \ldots, T_y$).
 
 <table>
 <td> 
@@ -533,11 +533,11 @@ Here are some properties of the model:
 
 - There are two separate LSTMs in this model (see diagram on the left). Because the one at the bottom of the picture is a Bi-directional LSTM and comes *before* the attention mechanism, we will call it *pre-attention* Bi-LSTM. The LSTM at the top of the diagram comes *after* the attention mechanism, so we will call it the *post-attention* LSTM. The pre-attention Bi-LSTM goes through <img src="https://latex.codecogs.com/gif.latex?$T_x$" title="$T_x$" /> time steps; the post-attention LSTM goes through <img src="https://latex.codecogs.com/gif.latex?$T_y$" title="$T_y$" /> time steps. 
 
-- The post-attention LSTM passes t \rangle}, c^{\langle t <img src="https://latex.codecogs.com/gif.latex?$s^{\langlet\rangle},c^{\langlet" title="$s^{\langlet\rangle},c^{\langlet" /> from one time step to the next. In the lecture videos, we were using only a basic RNN for the post-activation sequence model, so the state captured by the RNN output activations t\rangle}$. But since we are using an LSTM here, the LSTM has both the output activation <img src="https://latex.codecogs.com/gif.latex?$s^{\langle" title="$s^{\langle" /> and the hidden cell state t\rangle}$. However, unlike previous text generation examples, in this model the post-activation LSTM at time <img src="https://latex.codecogs.com/gif.latex?$t$" title="$t$" /> does will not take the specific generated t-1 <img src="https://latex.codecogs.com/gif.latex?$y^{\langlet-1" title="$y^{\langlet-1" /> as input; it only takes <img src="https://latex.codecogs.com/gif.latex?$s^{\langle" title="$s^{\langle" /> and <img src="https://latex.codecogs.com/gif.latex?$c^{\langle" title="$c^{\langle" /> as input. We have designed the model this way, because (unlike language generation where adjacent characters are highly correlated) there isn't as strong a dependency between the previous character and the next character in a YYYY-MM-DD date. 
+- The post-attention LSTM passes t \rangle}, c^{\langle t <img src="https://latex.codecogs.com/gif.latex?$s^{\langle&space;t&space;\rangle},&space;c^{\langle&space;t&space;\rangle}$" title="$s^{\langle t \rangle}, c^{\langle t \rangle}$" /> from one time step to the next. In the lecture videos, we were using only a basic RNN for the post-activation sequence model, so the state captured by the RNN output activations t\rangle}$. But since we are using an LSTM here, the LSTM has both the output activation <img src="https://latex.codecogs.com/gif.latex?$s^{\langle&space;t\rangle}$" title="$s^{\langle t\rangle}$" /> and the hidden cell state t\rangle}$. However, unlike previous text generation examples, in this model the post-activation LSTM at time <img src="https://latex.codecogs.com/gif.latex?$t$" title="$t$" /> does will not take the specific generated t-1 <img src="https://latex.codecogs.com/gif.latex?$y^{\langle&space;t-1&space;\rangle}$" title="$y^{\langle t-1 \rangle}$" /> as input; it only takes <img src="https://latex.codecogs.com/gif.latex?$s^{\langle&space;t\rangle}$" title="$s^{\langle t\rangle}$" /> and <img src="https://latex.codecogs.com/gif.latex?$c^{\langle&space;t\rangle}$" title="$c^{\langle t\rangle}$" /> as input. We have designed the model this way, because (unlike language generation where adjacent characters are highly correlated) there isn't as strong a dependency between the previous character and the next character in a YYYY-MM-DD date. 
 
-- We use t \rangle} = [\overrightarrow{a}^{\langle t \rangle}; \overleftarrow{a}^{\langle t <img src="https://latex.codecogs.com/gif.latex?$a^{\langlet\rangle}=[\overrightarrow{a}^{\langlet\rangle};\overleftarrow{a}^{\langlet" title="$a^{\langlet\rangle}=[\overrightarrow{a}^{\langlet\rangle};\overleftarrow{a}^{\langlet" /> to represent the concatenation of the activations of both the forward-direction and backward-directions of the pre-attention Bi-LSTM. 
+- We use t \rangle} = [\overrightarrow{a}^{\langle t \rangle}; \overleftarrow{a}^{\langle t <img src="https://latex.codecogs.com/gif.latex?$a^{\langle&space;t&space;\rangle}&space;=&space;[\overrightarrow{a}^{\langle&space;t&space;\rangle};&space;\overleftarrow{a}^{\langle&space;t&space;\rangle}]$" title="$a^{\langle t \rangle} = [\overrightarrow{a}^{\langle t \rangle}; \overleftarrow{a}^{\langle t \rangle}]$" /> to represent the concatenation of the activations of both the forward-direction and backward-directions of the pre-attention Bi-LSTM. 
 
-- The diagram on the right uses a `RepeatVector` node to copy t-1 \rangle}$'s value <img src="https://latex.codecogs.com/gif.latex?$T_x$" title="$T_x$" /> times, and then `Concatenation` to concatenate t-1 <img src="https://latex.codecogs.com/gif.latex?$s^{\langlet-1" title="$s^{\langlet-1" /> and t <img src="https://latex.codecogs.com/gif.latex?$a^{\langlet" title="$a^{\langlet" /> to compute t, t'\rangle}$, which is then passed through a softmax to compute t, t' \rangle}$.
+- The diagram on the right uses a `RepeatVector` node to copy t-1 \rangle}$'s value <img src="https://latex.codecogs.com/gif.latex?$T_x$" title="$T_x$" /> times, and then `Concatenation` to concatenate t-1 <img src="https://latex.codecogs.com/gif.latex?$s^{\langle&space;t-1&space;\rangle}$" title="$s^{\langle t-1 \rangle}$" /> and t <img src="https://latex.codecogs.com/gif.latex?$a^{\langle&space;t&space;\rangle}$" title="$a^{\langle t \rangle}$" /> to compute t, t'\rangle}$, which is then passed through a softmax to compute t, t' \rangle}$.
 
 ### Speech recognition
 
@@ -561,18 +561,18 @@ Spectrogram of an audio recording, where the color shows the degree to which dif
 
 The dimension of the output spectrogram depends upon the hyperparameters of the spectrogram software and the length of the input. Given 10 second audio clips as the "standard length" for the training examples. The number of timesteps of the spectrogram will be 5511, so = 5511$.
 
-With 10 seconds being the default training example length, 10 seconds of time can be discretized to different numbers of value. With 441000 hz (raw audio) and 5511 (spectrogram). In the former case, each step represents \approx <img src="https://latex.codecogs.com/gif.latex?$10/441000\approx" title="$10/441000\approx" /> seconds. In the second case, each step represents \approx <img src="https://latex.codecogs.com/gif.latex?$10/5511\approx" title="$10/5511\approx" /> seconds. 
+With 10 seconds being the default training example length, 10 seconds of time can be discretized to different numbers of value. With 441000 hz (raw audio) and 5511 (spectrogram). In the former case, each step represents \approx <img src="https://latex.codecogs.com/gif.latex?$10/441000&space;\approx&space;0.000023$" title="$10/441000 \approx 0.000023$" /> seconds. In the second case, each step represents \approx <img src="https://latex.codecogs.com/gif.latex?$10/5511&space;\approx&space;0.0018$" title="$10/5511 \approx 0.0018$" /> seconds. 
 
 For the 10sec of audio:
 
 - <img src="https://latex.codecogs.com/gif.latex?$441000$" title="$441000$" /> (raw audio)
 - 10000 used to synthesize audio
-- = <img src="https://latex.codecogs.com/gif.latex?$5511=" title="$5511=" /> (spectrogram output, and dimension of input to the neural network). 
-- = <img src="https://latex.codecogs.com/gif.latex?$1375=" title="$1375=" /> (the number of steps in the output of the GRU). 
+- = <img src="https://latex.codecogs.com/gif.latex?$5511&space;=&space;T_x$" title="$5511 = T_x$" /> (spectrogram output, and dimension of input to the neural network). 
+- = <img src="https://latex.codecogs.com/gif.latex?$1375&space;=&space;T_y$" title="$1375 = T_y$" /> (the number of steps in the output of the GRU). 
 
 Each of these representations correspond to exactly 10 seconds of time. It's just that they are discretizing them to different degrees. All of these are hyperparameters and can be changed (except the 441000, which is a function of the microphone). We have chosen values that are within the standard ranges uses for speech systems. 
 
-Consider the = <img src="https://latex.codecogs.com/gif.latex?$T_y=" title="$T_y=" /> number above. This means that for the output of the model, we discretize the 10s into 1375 time-intervals (each one of length \approx 0.0072$s) and try to predict for each of these intervals whether someone recently finished saying "activate."
+Consider the = <img src="https://latex.codecogs.com/gif.latex?$T_y&space;=&space;1375$" title="$T_y = 1375$" /> number above. This means that for the output of the model, we discretize the 10s into 1375 time-intervals (each one of length \approx 0.0072$s) and try to predict for each of these intervals whether someone recently finished saying "activate."
 
 Consider also the 10000 number above. This corresponds to discretizing the 10sec clip into 10/10000 = 0.001 second itervals. it means we are using 10,000 steps. To be used to generate training examples.
 
@@ -584,13 +584,13 @@ To synthesize a single training example:
 - Randomly insert 0-4 audio clips of "activate" into this 10sec clip
 - Randomly insert 0-2 audio clips of negative words into this 10sec clip
 
-Because we synthesized the word "activate" into the background clip, we know exactly when in the 10sec clip the "activate" makes its appearance. Given that t <img src="https://latex.codecogs.com/gif.latex?$y^{\langlet" title="$y^{\langlet" /> represent whether or not someone has just finished saying "activate." Given a background clip, we can initialize t <img src="https://latex.codecogs.com/gif.latex?$y^{\langlet" title="$y^{\langlet" /> for all since the clip doesn't contain any "activates.", When we insert or overlay an "activate" clip, we will also update labels for t \rangle}$, so that 50 steps (50 steps because we would be quite satisfied if the GRU detects "activate" anywhere within a short time-internal after finishing saying activate moment) of the output now have target label 1. And we will train a GRU to detect when someone has *finished* saying "activate".
+Because we synthesized the word "activate" into the background clip, we know exactly when in the 10sec clip the "activate" makes its appearance. Given that t <img src="https://latex.codecogs.com/gif.latex?$y^{\langle&space;t&space;\rangle}$" title="$y^{\langle t \rangle}$" /> represent whether or not someone has just finished saying "activate." Given a background clip, we can initialize t <img src="https://latex.codecogs.com/gif.latex?$y^{\langle&space;t&space;\rangle}=0$" title="$y^{\langle t \rangle}=0$" /> for all since the clip doesn't contain any "activates.", When we insert or overlay an "activate" clip, we will also update labels for t \rangle}$, so that 50 steps (50 steps because we would be quite satisfied if the GRU detects "activate" anywhere within a short time-internal after finishing saying activate moment) of the output now have target label 1. And we will train a GRU to detect when someone has *finished* saying "activate".
 
 #### Model
 
 <p align="center"><img src="figures/model_triger_words.png" width="550"></p>
 
-One key step of this model is the 1D convolutional step. It inputs the 5511 step spectrogram, and outputs a 1375 step output, which is then further processed by multiple layers to get the final = <img src="https://latex.codecogs.com/gif.latex?$T_y=" title="$T_y=" /> step output. This layer plays a role similar to the 2D convolutions you saw in CNNs, of extracting low-level features and then possibly generating an output of a smaller dimension.
+One key step of this model is the 1D convolutional step. It inputs the 5511 step spectrogram, and outputs a 1375 step output, which is then further processed by multiple layers to get the final = <img src="https://latex.codecogs.com/gif.latex?$T_y&space;=&space;1375$" title="$T_y = 1375$" /> step output. This layer plays a role similar to the 2D convolutions you saw in CNNs, of extracting low-level features and then possibly generating an output of a smaller dimension.
 
 Computationally, the 1-D conv layer also helps speed up the model because now the GRU  has to process only 1375 timesteps rather than 5511 timesteps. The two GRU layers read the sequence of inputs from left to right, then ultimately uses a dense+sigmoid layer to make a prediction for t \rangle}$. Because <img src="https://latex.codecogs.com/gif.latex?$y$" title="$y$" /> is binary valued (0 or 1), we use a sigmoid output at the last layer to estimate the chance of the output being 1, corresponding to the user having just said "activate."
 
