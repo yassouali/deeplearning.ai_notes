@@ -16,10 +16,8 @@ x:     Harry  Potter   and   Hermione Granfer   invented  a    new    spell.
 y:       1      1       0        1        1        0        0    0        0
 ```
 
-A t-th element of sequence of the input i is indexed as: $X^{(i)<t>}$, and the length of each input i is written as: $T_x^{(i)}$.
-
-Same for the ouputs, the t-th element of sequence of the ouptut i is $Y^{(i)<t>}$, and the output sequence length is $T_y^{(i)}$.
-
+A t-th element of sequence of the input i is indexed as: and the length of each input i is written as:
+Same for the ouputs, the t-th element of sequence of the ouptut i is and the output sequence length is
 So, in summary:
 - Superscript <img src="https://latex.codecogs.com/gif.latex?$[l]$" title="$[l]$" /> denotes an object associated with the <img src="https://latex.codecogs.com/gif.latex?$l^{th}$" title="$l^{th}$" /> layer. 
     - Example: <img src="https://latex.codecogs.com/gif.latex?$a^{[4]}$" title="$a^{[4]}$" /> is the <img src="https://latex.codecogs.com/gif.latex?$4^{th}$" title="$4^{th}$" /> layer activation. <img src="https://latex.codecogs.com/gif.latex?$W^{[5]}$" title="$W^{[5]}$" /> and <img src="https://latex.codecogs.com/gif.latex?$b^{[5]}$" title="$b^{[5]}$" /> are the <img src="https://latex.codecogs.com/gif.latex?$5^{th}$" title="$5^{th}$" /> layer parameters.
@@ -27,12 +25,10 @@ So, in summary:
 - Superscript <img src="https://latex.codecogs.com/gif.latex?$(i)$" title="$(i)$" /> denotes an object associated with the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> example. 
     - Example: <img src="https://latex.codecogs.com/gif.latex?$x^{(i)}$" title="$x^{(i)}$" /> is the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> training example input.
 
-- Superscript $\langle t \rangle$ denotes an object at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. 
-    - Example: $x^{\langle t \rangle}$ is the input x at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. $x^{(i)\langle t \rangle}$ is the input at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> timestep of example $i$.
-    
+- Superscript t <img src="https://latex.codecogs.com/gif.latex?$\langlet" title="$\langlet" /> denotes an object at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. 
+    - Example: t <img src="https://latex.codecogs.com/gif.latex?$x^{\langlet" title="$x^{\langlet" /> is the input x at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> time-step. t <img src="https://latex.codecogs.com/gif.latex?$x^{(i)\langlet" title="$x^{(i)\langlet" /> is the input at the <img src="https://latex.codecogs.com/gif.latex?$t^{th}$" title="$t^{th}$" /> timestep of example    
 - Lowerscript <img src="https://latex.codecogs.com/gif.latex?$i$" title="$i$" /> denotes the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> entry of a vector.
-    - Example: <img src="https://latex.codecogs.com/gif.latex?$a^{[l]}_i$" title="$a^{[l]}_i$" /> denotes the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> entry of the activations in layer $l$.
-
+    - Example: <img src="https://latex.codecogs.com/gif.latex?$a^{[l]}_i$" title="$a^{[l]}_i$" /> denotes the <img src="https://latex.codecogs.com/gif.latex?$i^{th}$" title="$i^{th}$" /> entry of the activations in layer
 How to represent individual words in the sentence? first we choose a dictonnary containing all the words we're interested in, and then use one hot representation to represent the words in the input sequence. If we encountered words not in the dictionnary, we represent the word as \<unk\> token.
 
 <p align="center"> <img src="figures/words_rep.png" width="500"></p>
@@ -83,14 +79,10 @@ The Backpropagation Through Time is the application of Backpropagation training 
 
 For the example above, where we have binary classification, we can define a loss at each time step by a simple logistic regression loss:
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;\mathcal&space;{&space;L&space;}&space;^&space;{&space;<&space;t&space;>&space;}(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;})&space;=&space;&space;-&space;y^{<t>}&space;\log(\hat{y}^{<t>})&space;-&space;(1&space;-&space;y^{<t>})&space;\log(1&space;-&space;\hat{y}^{<t>})$$
-" title="$$ \mathcal { L } ^ { < t > }( \hat { y } ^ { < t > } , y ^ { < t > }) =  - y^{<t>} \log(\hat{y}^{<t>}) - (1 - y^{<t>}) \log(1 - \hat{y}^{<t>})$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;\mathcal&space;{&space;L&space;}&space;^&space;{&space;<&space;t&space;>&space;}(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;})&space;=&space;&space;-&space;y^{<t>}&space;\log(\hat{y}^{<t>})&space;-&space;(1&space;-&space;y^{<t>})&space;\log(1&space;-&space;\hat{y}^{<t>})$$" title="$$ \mathcal { L } ^ { < t > }( \hat { y } ^ { < t > } , y ^ { < t > }) =  - y^{<t>} \log(\hat{y}^{<t>}) - (1 - y^{<t>}) \log(1 - \hat{y}^{<t>})$$" />
 And the calculate the loss for the whole sequence:
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;&space;\mathcal&space;{&space;L&space;}(\hat{y}&space;,&space;y)&space;=&space;\sum_1^{T_y}&space;\mathcal&space;{&space;L&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;\left(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;\right)$$
-" title="$$  \mathcal { L }(\hat{y} , y) = \sum_1^{T_y} \mathcal { L } ^ { < t > } \left( \hat { y } ^ { < t > } , y ^ { < t > } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;&space;\mathcal&space;{&space;L&space;}(\hat{y}&space;,&space;y)&space;=&space;\sum_1^{T_y}&space;\mathcal&space;{&space;L&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;\left(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;\right)$$" title="$$  \mathcal { L }(\hat{y} , y) = \sum_1^{T_y} \mathcal { L } ^ { < t > } \left( \hat { y } ^ { < t > } , y ^ { < t > } \right)$$" />
 
 And then back propagate the loss through unroled RNN.
 
@@ -114,7 +106,7 @@ In most cases, the size of the input sequence Tx is different than the ouput seq
 
 ### Language modeling
 
-Language Modeling and LM for short, is the development of probabilistic models that are able to predict the next word in the sequence given the words that precede it. A statistical language model is a probability distribution over sequences of words. Given such a sequence, say of length m, it assigns a probability $P(w_{1},\ldots ,w_{m})$ to the whole sequence. Having a way to estimate the relative likelihood of different phrases is useful in many natural language processing applications, especially ones that generate text as an output.
+Language Modeling and LM for short, is the development of probabilistic models that are able to predict the next word in the sequence given the words that precede it. A statistical language model is a probability distribution over sequences of words. Given such a sequence, say of length m, it assigns a probability <img src="https://latex.codecogs.com/gif.latex?$P(w_{1},\ldots" title="$P(w_{1},\ldots" /> to the whole sequence. Having a way to estimate the relative likelihood of different phrases is useful in many natural language processing applications, especially ones that generate text as an output.
 
 *Language modeling is the task of assigning a probability to sentences in a language. […] Besides assigning a probability to each sequence of words, the language models also assigns a probability for the likelihood of a given word (or a sequence of words) to follow a sequence of words.* Neural Network Methods in Natural Language Processing, 2017.
 
@@ -128,13 +120,9 @@ A language model learns the probability of word occurrence based on examples of 
 
 To train this network we define a softmax loss function associated with each word / time step, and some over these loses to get the global cost.
 
-<img src="https://latex.codecogs.com/gif.latex?$$\mathcal&space;{&space;L&space;}&space;\left(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;\right)&space;=&space;-&space;\sum&space;_&space;{&space;i&space;}&space;y&space;_&space;{&space;i&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;\log&space;\hat&space;{&space;y&space;}&space;_&space;{&space;i&space;}&space;^&space;{&space;<&space;t&space;>&space;}$$
-" title="$$\mathcal { L } \left( \hat { y } ^ { < t > } , y ^ { < t > } \right) = - \sum _ { i } y _ { i } ^ { < t > } \log \hat { y } _ { i } ^ { < t > }$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\mathcal&space;{&space;L&space;}&space;\left(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;\right)&space;=&space;-&space;\sum&space;_&space;{&space;i&space;}&space;y&space;_&space;{&space;i&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;\log&space;\hat&space;{&space;y&space;}&space;_&space;{&space;i&space;}&space;^&space;{&space;<&space;t&space;>&space;}$$" title="$$\mathcal { L } \left( \hat { y } ^ { < t > } , y ^ { < t > } \right) = - \sum _ { i } y _ { i } ^ { < t > } \log \hat { y } _ { i } ^ { < t > }$$" />
 
-<img src="https://latex.codecogs.com/gif.latex?$$\mathcal&space;{&space;L&space;}&space;=&space;\sum&space;_&space;{&space;L&space;}&space;\mathcal&space;{&space;L&space;}&space;\left(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;\right)$$
-" title="$$\mathcal { L } = \sum _ { L } \mathcal { L } \left( \hat { y } ^ { < t > } , y ^ { < t > } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\mathcal&space;{&space;L&space;}&space;=&space;\sum&space;_&space;{&space;L&space;}&space;\mathcal&space;{&space;L&space;}&space;\left(&space;\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;,&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;\right)$$" title="$$\mathcal { L } = \sum _ { L } \mathcal { L } \left( \hat { y } ^ { < t > } , y ^ { < t > } \right)$$" />
 
 ### Sampling novel sequences
 After we train a sequence model, one of the ways we can informally get a sense of what is learned is sampling novel sequences.
@@ -161,7 +149,7 @@ We can vizualise the GRU unit as follows:
 
 <p align="center"><img src="figures/RNN_unit.png" width="300"></p>
 
-GRU will have a new cell C called memory cell, providing a bit of memory to remeber if the car was singular or plural, <img src="https://latex.codecogs.com/gif.latex?$c^{<t>}$" title="$c^{<t>}$" /> will output an activation $a^{<t>}$, at every time step, we'll consider writing <img src="https://latex.codecogs.com/gif.latex?$\tilde{C}^{<t>}$" title="$\tilde{C}^{<t>}$" /> to the memory cell, and the important idea of GRU, is having a gate <img src="https://latex.codecogs.com/gif.latex?$\Gamma_u$" title="$\Gamma_u$" /> between zero and one (zero or one most of the time), and the gate will decide if we update the memory cell with the condidate <img src="https://latex.codecogs.com/gif.latex?$\tilde{C}^{<t>}$" title="$\tilde{C}^{<t>}$" /> or not.
+GRU will have a new cell C called memory cell, providing a bit of memory to remeber if the car was singular or plural, <img src="https://latex.codecogs.com/gif.latex?$c^{<t>}$" title="$c^{<t>}$" /> will output an activation at every time step, we'll consider writing <img src="https://latex.codecogs.com/gif.latex?$\tilde{C}^{<t>}$" title="$\tilde{C}^{<t>}$" /> to the memory cell, and the important idea of GRU, is having a gate <img src="https://latex.codecogs.com/gif.latex?$\Gamma_u$" title="$\Gamma_u$" /> between zero and one (zero or one most of the time), and the gate will decide if we update the memory cell with the condidate <img src="https://latex.codecogs.com/gif.latex?$\tilde{C}^{<t>}$" title="$\tilde{C}^{<t>}$" /> or not.
 
 We also have another gate  <img src="https://latex.codecogs.com/gif.latex?$\Gamma_r$" title="$\Gamma_r$" /> which tells us how relative is the sate of the memory cell to compute the new condidate for the memory cell.
 
@@ -184,47 +172,35 @@ GRUs can allow us to learn very long range connections in a sequence. The other 
 
 For the sake of this illustration, lets assume we are reading words in a piece of text, and want use an LSTM to keep track of grammatical structures, such as whether the subject is singular or plural. If the subject changes from a singular word to a plural word, we need to find a way to get rid of our previously stored memory value of the singular/plural state. In an LSTM, the forget gate lets us do this: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$\Gamma_f^{\langle&space;t&space;\rangle}&space;=&space;\sigma(W_f[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]&space;&plus;&space;b_f)$$
-" title="$$\Gamma_f^{\langle t \rangle} = \sigma(W_f[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_f)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\Gamma_f^{\langle&space;t&space;\rangle}&space;=&space;\sigma(W_f[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]&space;&plus;&space;b_f)$$" title="$$\Gamma_f^{\langle t \rangle} = \sigma(W_f[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_f)$$" />
 
-Here, <img src="https://latex.codecogs.com/gif.latex?$W_f$" title="$W_f$" /> are weights that govern the forget gate's behavior. We concatenate $[a^{\langle t-1 \rangle}, x^{\langle t \rangle}]$ and multiply by $W_f$. The equation above results in a vector $\Gamma_f^{\langle t \rangle}$ with values between 0 and 1. This forget gate vector will be multiplied element-wise by the previous cell state $c^{\langle t-1 \rangle}$. So if one of the values of $\Gamma_f^{\langle t \rangle}$ is 0 (or close to 0) then it means that the LSTM should remove that piece of information (e.g. the singular subject) in the corresponding component of $c^{\langle t-1 \rangle}$. If one of the values is 1, then it will keep the information. 
+Here, <img src="https://latex.codecogs.com/gif.latex?$W_f$" title="$W_f$" /> are weights that govern the forget gate's behavior. We concatenate t-1 \rangle}, x^{\langle t <img src="https://latex.codecogs.com/gif.latex?$[a^{\langlet-1\rangle},x^{\langlet" title="$[a^{\langlet-1\rangle},x^{\langlet" /> and multiply by The equation above results in a vector t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_f^{\langlet" title="$\Gamma_f^{\langlet" /> with values between 0 and 1. This forget gate vector will be multiplied element-wise by the previous cell state t-1 \rangle}$. So if one of the values of t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_f^{\langlet" title="$\Gamma_f^{\langlet" /> is 0 (or close to 0) then it means that the LSTM should remove that piece of information (e.g. the singular subject) in the corresponding component of t-1 \rangle}$. If one of the values is 1, then it will keep the information. 
 
 #### - Update gate
 
 Once we forget that the subject being discussed is singular, we need to find a way to update it to reflect that the new subject is now plural. Here is the formulat for the update gate: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$\Gamma_u^{\langle&space;t&space;\rangle}&space;=&space;\sigma(W_u[a^{\langle&space;t-1&space;\rangle},&space;x^{\{t\}}]&space;&plus;&space;b_u)$$&space;
-" title="$$\Gamma_u^{\langle t \rangle} = \sigma(W_u[a^{\langle t-1 \rangle}, x^{\{t\}}] + b_u)$$ 
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\Gamma_u^{\langle&space;t&space;\rangle}&space;=&space;\sigma(W_u[a^{\langle&space;t-1&space;\rangle},&space;x^{\{t\}}]&space;&plus;&space;b_u)$$&space;" title="$$\Gamma_u^{\langle t \rangle} = \sigma(W_u[a^{\langle t-1 \rangle}, x^{\{t\}}] + b_u)$$ " />
 
-Similar to the forget gate, here $\Gamma_u^{\langle t \rangle}$ is again a vector of values between 0 and 1. This will be multiplied element-wise with $\tilde{c}^{\langle t \rangle}$, in order to compute $c^{\langle t \rangle}$.
+Similar to the forget gate, here t <img src="https://latex.codecogs.com/gif.latex?$\Gamma_u^{\langlet" title="$\Gamma_u^{\langlet" /> is again a vector of values between 0 and 1. This will be multiplied element-wise with t \rangle}$, in order to compute t \rangle}$.
 
 #### - Updating the cell 
 
 To update the new subject we need to create a new vector of numbers that we can add to our previous cell state. The equation we use is: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;\tilde{c}^{\langle&space;t&space;\rangle}&space;=&space;\tanh(W_c[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]&space;&plus;&space;b_c)$$
-" title="$$ \tilde{c}^{\langle t \rangle} = \tanh(W_c[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_c)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;\tilde{c}^{\langle&space;t&space;\rangle}&space;=&space;\tanh(W_c[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]&space;&plus;&space;b_c)$$" title="$$ \tilde{c}^{\langle t \rangle} = \tanh(W_c[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_c)$$" />
 
 Finally, the new cell state is: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;c^{\langle&space;t&space;\rangle}&space;=&space;\Gamma_f^{\langle&space;t&space;\rangle}*&space;c^{\langle&space;t-1&space;\rangle}&space;&plus;&space;\Gamma_u^{\langle&space;t&space;\rangle}&space;*\tilde{c}^{\langle&space;t&space;\rangle}$$
-" title="$$ c^{\langle t \rangle} = \Gamma_f^{\langle t \rangle}* c^{\langle t-1 \rangle} + \Gamma_u^{\langle t \rangle} *\tilde{c}^{\langle t \rangle}$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;c^{\langle&space;t&space;\rangle}&space;=&space;\Gamma_f^{\langle&space;t&space;\rangle}*&space;c^{\langle&space;t-1&space;\rangle}&space;&plus;&space;\Gamma_u^{\langle&space;t&space;\rangle}&space;*\tilde{c}^{\langle&space;t&space;\rangle}$$" title="$$ c^{\langle t \rangle} = \Gamma_f^{\langle t \rangle}* c^{\langle t-1 \rangle} + \Gamma_u^{\langle t \rangle} *\tilde{c}^{\langle t \rangle}$$" />
 
 
 #### - Output gate
 
 To decide which outputs we will use, we will use the following two formulas: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;\Gamma_o^{\langle&space;t&space;\rangle}=&space;&space;\sigma(W_o[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]&space;&plus;&space;b_o)$$&space;
-" title="$$ \Gamma_o^{\langle t \rangle}=  \sigma(W_o[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_o)$$ 
-" />
-<img src="https://latex.codecogs.com/gif.latex?$$&space;a^{\langle&space;t&space;\rangle}&space;=&space;\Gamma_o^{\langle&space;t&space;\rangle}*&space;\tanh(c^{\langle&space;t&space;\rangle})$$
-" title="$$ a^{\langle t \rangle} = \Gamma_o^{\langle t \rangle}* \tanh(c^{\langle t \rangle})$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;\Gamma_o^{\langle&space;t&space;\rangle}=&space;&space;\sigma(W_o[a^{\langle&space;t-1&space;\rangle},&space;x^{\langle&space;t&space;\rangle}]&space;&plus;&space;b_o)$$&space;" title="$$ \Gamma_o^{\langle t \rangle}=  \sigma(W_o[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_o)$$ " />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;a^{\langle&space;t&space;\rangle}&space;=&space;\Gamma_o^{\langle&space;t&space;\rangle}*&space;\tanh(c^{\langle&space;t&space;\rangle})$$" title="$$ a^{\langle t \rangle} = \Gamma_o^{\langle t \rangle}* \tanh(c^{\langle t \rangle})$$" />
 
 Where we decide what to output using a sigmoid function, and then we multiply that by the <img src="https://latex.codecogs.com/gif.latex?$\tanh$" title="$\tanh$" /> of the previous state.
 
@@ -242,22 +218,16 @@ The LSTM backward pass is slighltly more complicated than the forward one. We ha
 
 <p align="center"><img src="figures/lstm_param_deriv.png"></p>
 
-To calculate $db_f, db_u, db_c, db_o$ we just need to sum across the horizontal (axis= 1) axis on $d\Gamma_f^{\langle t \rangle}, d\Gamma_u^{\langle t \rangle}, d\tilde c^{\langle t \rangle}, d\Gamma_o^{\langle t \rangle}$ respectively. This is done beacuse in the forward pas an automatic broadcasting was perfomed.
+To calculate db_u, db_c, <img src="https://latex.codecogs.com/gif.latex?$db_f,db_u,db_c," title="$db_f,db_u,db_c," /> we just need to sum across the horizontal (axis= 1) axis on t \rangle}, d\Gamma_u^{\langle t \rangle}, d\tilde c^{\langle t \rangle}, d\Gamma_o^{\langle t <img src="https://latex.codecogs.com/gif.latex?$d\Gamma_f^{\langlet\rangle},d\Gamma_u^{\langlet\rangle},d\tildec^{\langlet\rangle},d\Gamma_o^{\langlet" title="$d\Gamma_f^{\langlet\rangle},d\Gamma_u^{\langlet\rangle},d\tildec^{\langlet\rangle},d\Gamma_o^{\langlet" /> respectively. This is done beacuse in the forward pas an automatic broadcasting was perfomed.
 
 Finally, we will compute the derivative with respect to the previous hidden state, previous memory state, and input.
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;da_{prev}&space;=&space;W_f^T*d\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;W_u^T&space;*&space;d\Gamma_u^{\langle&space;t&space;\rangle}&plus;&space;W_c^T&space;*&space;d\tilde&space;c^{\langle&space;t&space;\rangle}&space;&plus;&space;W_o^T&space;*&space;d\Gamma_o^{\langle&space;t&space;\rangle}$$
-" title="$$ da_{prev} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c^{\langle t \rangle} + W_o^T * d\Gamma_o^{\langle t \rangle}$$
-" />
-Here, the weights for equations 13 are the first n_a, (i.e. $W_f = W_f[:n_a,:]$ etc...)
+<img src="https://latex.codecogs.com/gif.latex?$$&space;da_{prev}&space;=&space;W_f^T*d\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;W_u^T&space;*&space;d\Gamma_u^{\langle&space;t&space;\rangle}&plus;&space;W_c^T&space;*&space;d\tilde&space;c^{\langle&space;t&space;\rangle}&space;&plus;&space;W_o^T&space;*&space;d\Gamma_o^{\langle&space;t&space;\rangle}$$" title="$$ da_{prev} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c^{\langle t \rangle} + W_o^T * d\Gamma_o^{\langle t \rangle}$$" />
+Here, the weights for equations 13 are the first n_a, (i.e. = <img src="https://latex.codecogs.com/gif.latex?$W_f=" title="$W_f=" /> etc...)
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;dc_{prev}&space;=&space;dc_{next}\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;\Gamma_o^{\langle&space;t&space;\rangle}&space;*&space;(1-&space;\tanh(c_{next})^2)*\Gamma_f^{\langle&space;t&space;\rangle}*da_{next}$$
-" title="$$ dc_{prev} = dc_{next}\Gamma_f^{\langle t \rangle} + \Gamma_o^{\langle t \rangle} * (1- \tanh(c_{next})^2)*\Gamma_f^{\langle t \rangle}*da_{next}$$
-" />
-<img src="https://latex.codecogs.com/gif.latex?$$&space;dx^{\langle&space;t&space;\rangle}&space;=&space;W_f^T*d\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;W_u^T&space;*&space;d\Gamma_u^{\langle&space;t&space;\rangle}&plus;&space;W_c^T&space;*&space;d\tilde&space;c_t&space;&plus;&space;W_o^T&space;*&space;d\Gamma_o^{\langle&space;t&space;\rangle}$$
-" title="$$ dx^{\langle t \rangle} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c_t + W_o^T * d\Gamma_o^{\langle t \rangle}$$
-" />
-where the weights for equation 15 are from n_a to the end, (i.e. $W_f = W_f[n_a:,:]$ etc...)
+<img src="https://latex.codecogs.com/gif.latex?$$&space;dc_{prev}&space;=&space;dc_{next}\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;\Gamma_o^{\langle&space;t&space;\rangle}&space;*&space;(1-&space;\tanh(c_{next})^2)*\Gamma_f^{\langle&space;t&space;\rangle}*da_{next}$$" title="$$ dc_{prev} = dc_{next}\Gamma_f^{\langle t \rangle} + \Gamma_o^{\langle t \rangle} * (1- \tanh(c_{next})^2)*\Gamma_f^{\langle t \rangle}*da_{next}$$" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;dx^{\langle&space;t&space;\rangle}&space;=&space;W_f^T*d\Gamma_f^{\langle&space;t&space;\rangle}&space;&plus;&space;W_u^T&space;*&space;d\Gamma_u^{\langle&space;t&space;\rangle}&plus;&space;W_c^T&space;*&space;d\tilde&space;c_t&space;&plus;&space;W_o^T&space;*&space;d\Gamma_o^{\langle&space;t&space;\rangle}$$" title="$$ dx^{\langle t \rangle} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c_t + W_o^T * d\Gamma_o^{\langle t \rangle}$$" />
+where the weights for equation 15 are from n_a to the end, (i.e. = <img src="https://latex.codecogs.com/gif.latex?$W_f=" title="$W_f=" /> etc...)
 
 
 
@@ -272,9 +242,7 @@ BRNN tries to solve this issue using two compoents, forward component and backwa
 
 And both the forward and backward activations are used to compute the output:
 
-<img src="https://latex.codecogs.com/gif.latex?$$\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;y}&space;[\overrightarrow{a}^{<t>},&space;\overleftarrow{a}^{<t>}]&space;&plus;&space;b&space;_&space;{&space;y&space;}&space;\right)$$
-" title="$$\hat { y } ^ { < t > } = g \left( W _ { y} [\overrightarrow{a}^{<t>}, \overleftarrow{a}^{<t>}] + b _ { y } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\hat&space;{&space;y&space;}&space;^&space;{&space;<&space;t&space;>&space;}&space;=&space;g&space;\left(&space;W&space;_&space;{&space;y}&space;[\overrightarrow{a}^{<t>},&space;\overleftarrow{a}^{<t>}]&space;&plus;&space;b&space;_&space;{&space;y&space;}&space;\right)$$" title="$$\hat { y } ^ { < t > } = g \left( W _ { y} [\overrightarrow{a}^{<t>}, \overleftarrow{a}^{<t>}] + b _ { y } \right)$$" />
 
 But the biggest downside of BRNNs, is that we need to process the whole sequence before being able to ouput the first prediction.
 
@@ -313,28 +281,24 @@ Transfer learning and word embeddings:
 
 Word embeddings can be used in analogies, given that the vector difference between man & women, is equal to the difference between king & queen. so E_man - E_women ~ E_king - E_queen, and if want to find the word Queen, we can optimise for the word to be similar to king as similar women is to man:
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;\operatorname{argmax}_w&space;sim&space;\left(&space;e&space;_&space;{&space;w&space;}&space;,&space;e&space;_&space;{&space;k&space;i&space;n&space;g&space;}&space;-&space;e&space;_&space;{&space;m&space;a&space;n&space;}&space;&plus;&space;e&space;_&space;{&space;w&space;o&space;m&space;a&space;n&space;}&space;\right)$$&space;
-" title="$$ \operatorname{argmax}_w sim \left( e _ { w } , e _ { k i n g } - e _ { m a n } + e _ { w o m a n } \right)$$ 
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;\operatorname{argmax}_w&space;sim&space;\left(&space;e&space;_&space;{&space;w&space;}&space;,&space;e&space;_&space;{&space;k&space;i&space;n&space;g&space;}&space;-&space;e&space;_&space;{&space;m&space;a&space;n&space;}&space;&plus;&space;e&space;_&space;{&space;w&space;o&space;m&space;a&space;n&space;}&space;\right)$$&space;" title="$$ \operatorname{argmax}_w sim \left( e _ { w } , e _ { k i n g } - e _ { m a n } + e _ { w o m a n } \right)$$ " />
 
 There is various similarity functions, such as:
 
-**1- Euclidean distance** $\sqrt { \sum _ { i = 1 } ^ { k } \left( u _ { i } - v _ { i } \right) ^ { 2 } }$,
+**1- Euclidean distance** { \sum _ { i = 1 } ^ { k } \left( u _ { i } - v _ { i } \right) ^ { 2 } }$,
 
 **2- Cosine similarity**
-Given two vectors <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and $v$, cosine similarity is defined as follows: 
+Given two vectors <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and cosine similarity is defined as follows: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$\text{CosineSimilarity(u,&space;v)}&space;=&space;\frac&space;{u&space;.&space;v}&space;{||u||_2&space;||v||_2}&space;=&space;cos(\theta)$$
-" title="$$\text{CosineSimilarity(u, v)} = \frac {u . v} {||u||_2 ||v||_2} = cos(\theta)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\text{CosineSimilarity(u,&space;v)}&space;=&space;\frac&space;{u&space;.&space;v}&space;{||u||_2&space;||v||_2}&space;=&space;cos(\theta)$$" title="$$\text{CosineSimilarity(u, v)} = \frac {u . v} {||u||_2 ||v||_2} = cos(\theta)$$" />
 
-where <img src="https://latex.codecogs.com/gif.latex?$u.v$" title="$u.v$" /> is the dot product (or inner product) of two vectors, <img src="https://latex.codecogs.com/gif.latex?$||u||_2$" title="$||u||_2$" /> is the norm (or length) of the vector $u$, and <img src="https://latex.codecogs.com/gif.latex?$\theta$" title="$\theta$" /> is the angle between <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and $v$. This similarity depends on the angle between <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and $v$. If <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and <img src="https://latex.codecogs.com/gif.latex?$v$" title="$v$" /> are very similar, their cosine similarity will be close to 1; if they are dissimilar, the cosine similarity will take a smaller value. 
+where <img src="https://latex.codecogs.com/gif.latex?$u.v$" title="$u.v$" /> is the dot product (or inner product) of two vectors, <img src="https://latex.codecogs.com/gif.latex?$||u||_2$" title="$||u||_2$" /> is the norm (or length) of the vector and <img src="https://latex.codecogs.com/gif.latex?$\theta$" title="$\theta$" /> is the angle between <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and This similarity depends on the angle between <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and If <img src="https://latex.codecogs.com/gif.latex?$u$" title="$u$" /> and <img src="https://latex.codecogs.com/gif.latex?$v$" title="$v$" /> are very similar, their cosine similarity will be close to 1; if they are dissimilar, the cosine similarity will take a smaller value. 
 
 <p align="center"><img src="figures/cosine_sim.png" style="width:800px;height:250px;"></p>
 
 **Embedding matrix** Let's start to formalize the problem of learning a good word embedding. When we implement an algorithm to learn a word embedding, we end up learning is an embedding matrix.
 
-Given a corpus of 10,000 words, and we're learning a 300 dimenionnal embeddings, the embeddings matrix is of size 300 x 10,000, and to select a given embedding for word j, we multiply a 10,000 one hot vector where oj = 1, with the embedding matrix to select the j-column, $E \cdot O _ { j } = e _ { j }$, we initialize the matrix randomly and use gradient descent to learn the matrix. In practice, it is not efficient to use vector multiplication to extract the word embedding, but rather a specialized function to look up the embeddings.
+Given a corpus of 10,000 words, and we're learning a 300 dimenionnal embeddings, the embeddings matrix is of size 300 x 10,000, and to select a given embedding for word j, we multiply a 10,000 one hot vector where oj = 1, with the embedding matrix to select the j-column, \cdot O _ { j } = e _ { j }$, we initialize the matrix randomly and use gradient descent to learn the matrix. In practice, it is not efficient to use vector multiplication to extract the word embedding, but rather a specialized function to look up the embeddings.
 
 <p align="center"><img src="figures/emb_matrix.png" width="500"></p>
 
@@ -357,13 +321,9 @@ For that we construct a simple network, given a one hote vector, get the word em
     Context word ---> E matrix ---> embedding ---> Softmax ----> prediction
 
 Softmax ouputs are computed as follows:
-<img src="https://latex.codecogs.com/gif.latex?$$&space;p&space;(&space;t&space;|&space;c&space;)&space;&space;=&space;\frac&space;{&space;e&space;^&space;{&space;\theta&space;_&space;{&space;t&space;}&space;^&space;{&space;T&space;}&space;e&space;_&space;{&space;c&space;}&space;}&space;}&space;{&space;\sum&space;_&space;{&space;j&space;=&space;1&space;}&space;^&space;{&space;10,000&space;}&space;e&space;^&space;{&space;\theta&space;_&space;{&space;j&space;}&space;^&space;{&space;T&space;}&space;e&space;_&space;{&space;c&space;}&space;}&space;}$$
-" title="$$ p ( t | c )  = \frac { e ^ { \theta _ { t } ^ { T } e _ { c } } } { \sum _ { j = 1 } ^ { 10,000 } e ^ { \theta _ { j } ^ { T } e _ { c } } }$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;p&space;(&space;t&space;|&space;c&space;)&space;&space;=&space;\frac&space;{&space;e&space;^&space;{&space;\theta&space;_&space;{&space;t&space;}&space;^&space;{&space;T&space;}&space;e&space;_&space;{&space;c&space;}&space;}&space;}&space;{&space;\sum&space;_&space;{&space;j&space;=&space;1&space;}&space;^&space;{&space;10,000&space;}&space;e&space;^&space;{&space;\theta&space;_&space;{&space;j&space;}&space;^&space;{&space;T&space;}&space;e&space;_&space;{&space;c&space;}&space;}&space;}$$" title="$$ p ( t | c )  = \frac { e ^ { \theta _ { t } ^ { T } e _ { c } } } { \sum _ { j = 1 } ^ { 10,000 } e ^ { \theta _ { j } ^ { T } e _ { c } } }$$" />
 
-<img src="https://latex.codecogs.com/gif.latex?$$L&space;(&space;\hat&space;{&space;y&space;}&space;,&space;y&space;)&space;=&space;-&space;\sum&space;_&space;{&space;i&space;=&space;1&space;}&space;^&space;{&space;10,000&space;}&space;y&space;_&space;{&space;i&space;}&space;\log&space;\hat&space;{&space;y&space;}$$
-" title="$$L ( \hat { y } , y ) = - \sum _ { i = 1 } ^ { 10,000 } y _ { i } \log \hat { y }$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$L&space;(&space;\hat&space;{&space;y&space;}&space;,&space;y&space;)&space;=&space;-&space;\sum&space;_&space;{&space;i&space;=&space;1&space;}&space;^&space;{&space;10,000&space;}&space;y&space;_&space;{&space;i&space;}&space;\log&space;\hat&space;{&space;y&space;}$$" title="$$L ( \hat { y } , y ) = - \sum _ { i = 1 } ^ { 10,000 } y _ { i } \log \hat { y }$$" />
 
 The problem with the skip gram model is that for each time we want to evaluate the probability, we need to sum over all the word in the vocabulary, with is very slow given how big some vocabularies are, one solution is using Hierarchical softmax, with a complexity of O(log(n)) using a tree (can be asymetric), where most commons words tend to be on top and less common words deeper to further reduce the computations.
 
@@ -372,15 +332,11 @@ The training objective, is given two words, are these two word have relative mea
 
 One problem is that if we sampled randomly / according to the empirical frequency the second words, we'll end up with more negatives of the frequent words in the corpus, the solution is using the frequency of a given word to calculate the probability of sampling a given word:
 
-<img src="https://latex.codecogs.com/gif.latex?$$&space;P&space;\left(&space;\omega&space;_&space;{&space;i&space;}&space;\right)&space;=&space;\frac{f&space;\left(&space;\omega&space;_&space;{&space;i&space;}&space;\right)&space;^&space;{&space;3&space;/&space;4&space;}}{\sum&space;_&space;{&space;j&space;=&space;1&space;}&space;^&space;{&space;10,1000&space;}&space;f&space;\left(&space;\omega&space;_&space;{&space;j&space;}&space;\right)&space;^&space;{&space;3&space;/&space;4&space;}}$$
-" title="$$ P \left( \omega _ { i } \right) = \frac{f \left( \omega _ { i } \right) ^ { 3 / 4 }}{\sum _ { j = 1 } ^ { 10,1000 } f \left( \omega _ { j } \right) ^ { 3 / 4 }}$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$&space;P&space;\left(&space;\omega&space;_&space;{&space;i&space;}&space;\right)&space;=&space;\frac{f&space;\left(&space;\omega&space;_&space;{&space;i&space;}&space;\right)&space;^&space;{&space;3&space;/&space;4&space;}}{\sum&space;_&space;{&space;j&space;=&space;1&space;}&space;^&space;{&space;10,1000&space;}&space;f&space;\left(&space;\omega&space;_&space;{&space;j&space;}&space;\right)&space;^&space;{&space;3&space;/&space;4&space;}}$$" title="$$ P \left( \omega _ { i } \right) = \frac{f \left( \omega _ { i } \right) ^ { 3 / 4 }}{\sum _ { j = 1 } ^ { 10,1000 } f \left( \omega _ { j } \right) ^ { 3 / 4 }}$$" />
 
 To solve the computation problem, we model the problem as a binary logistic regression problem instead if using 10,000 way softmax, at each step only k+1 classifiers are modified (k negatives and 1 positive).
 
-<img src="https://latex.codecogs.com/gif.latex?$$P&space;(&space;y&space;=&space;1&space;|&space;c&space;,&space;t&space;)&space;=&space;\sigma&space;\left(&space;\theta&space;_&space;{&space;t&space;}&space;^&space;{&space;T&space;}&space;e&space;_&space;{&space;c&space;}&space;\right)$$
-" title="$$P ( y = 1 | c , t ) = \sigma \left( \theta _ { t } ^ { T } e _ { c } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$P&space;(&space;y&space;=&space;1&space;|&space;c&space;,&space;t&space;)&space;=&space;\sigma&space;\left(&space;\theta&space;_&space;{&space;t&space;}&space;^&space;{&space;T&space;}&space;e&space;_&space;{&space;c&space;}&space;\right)$$" title="$$P ( y = 1 | c , t ) = \sigma \left( \theta _ { t } ^ { T } e _ { c } \right)$$" />
 
 <p align="center"><img src="figures/negative_sampling.png" width="550"></p>
 
@@ -390,19 +346,17 @@ GloVe trains word embeddings by performing a weighted factorisation of the log o
 
 The cost function is given by:
 
-<img src="https://latex.codecogs.com/gif.latex?$$min&space;\displaystyle&space;\sum_{i,&space;j&space;=&space;1}^V&space;f(X_{i,j})&space;(\theta_i^T&space;e_j&space;&plus;&space;b_i&space;&plus;&space;b_j&space;-&space;\text{log}&space;X_{i,j})^2$$
-" title="$$min \displaystyle \sum_{i, j = 1}^V f(X_{i,j}) (\theta_i^T e_j + b_i + b_j - \text{log} X_{i,j})^2$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$min&space;\displaystyle&space;\sum_{i,&space;j&space;=&space;1}^V&space;f(X_{i,j})&space;(\theta_i^T&space;e_j&space;&plus;&space;b_i&space;&plus;&space;b_j&space;-&space;\text{log}&space;X_{i,j})^2$$" title="$$min \displaystyle \sum_{i, j = 1}^V f(X_{i,j}) (\theta_i^T e_j + b_i + b_j - \text{log} X_{i,j})^2$$" />
 
 where:
 
 * V is the size of the vocabulary,
 * X denotes the word co-occurrence matrix (so <img src="https://latex.codecogs.com/gif.latex?$X_{i,j}$" title="$X_{i,j}$" /> is the number of times that word j occurs in the context of word i)
 * <img src="https://latex.codecogs.com/gif.latex?$X_{i,j}$" title="$X_{i,j}$" /> = # times i appears in the context of j, <img src="https://latex.codecogs.com/gif.latex?$X_{i,j}$" title="$X_{i,j}$" /> can be symetric if the context is a window.
-* the weighting f is given by $f(x) = (x / x_{\text{max}})^\alpha$ if $x < x_{\text{max}}$ and 1 otherwise, to avoid doing the computation when Xi,j = 0
-* <img src="https://latex.codecogs.com/gif.latex?$x_{\text{max}}$" title="$x_{\text{max}}$" /> = 100 and $\alpha = 0.75$ (determined empirically),
-* $\theta_i$, <img src="https://latex.codecogs.com/gif.latex?$e_j$" title="$e_j$" /> are the two layers of word vectors,
-* $b_i$, <img src="https://latex.codecogs.com/gif.latex?$b_j$" title="$b_j$" /> are bias terms.
+* the weighting f is given by = (x / <img src="https://latex.codecogs.com/gif.latex?$f(x)=(x/" title="$f(x)=(x/" /> if < <img src="https://latex.codecogs.com/gif.latex?$x<" title="$x<" /> and 1 otherwise, to avoid doing the computation when Xi,j = 0
+* <img src="https://latex.codecogs.com/gif.latex?$x_{\text{max}}$" title="$x_{\text{max}}$" /> = 100 and = <img src="https://latex.codecogs.com/gif.latex?$\alpha=" title="$\alpha=" /> (determined empirically),
+* <img src="https://latex.codecogs.com/gif.latex?$e_j$" title="$e_j$" /> are the two layers of word vectors,
+* <img src="https://latex.codecogs.com/gif.latex?$b_j$" title="$b_j$" /> are bias terms.
 
 Note that the product is only over pairs i, j for which <img src="https://latex.codecogs.com/gif.latex?$X_{i,j}$" title="$X_{i,j}$" /> is non-zero. This means that GloVe (in contrast to word2vec with negative sampling) trains only “positive samples” and also that we don’t have to worry about the logarithm of zero.
 
@@ -428,29 +382,24 @@ A possible solutions is to use many-to-one RNN network and give the word embeddi
 
 Word embeddings can reflect gender, ethnicity... and other biases of the text used to train the model, How to adress these biases in word embeddings?
 
-1. Identify bias direction, using $e_{he} - e_{she}$, $e_{male} - e_{female}$ ..., to find the direction of bias (can be 1D or higher).
+1. Identify bias direction, using - e_{she}$, - <img src="https://latex.codecogs.com/gif.latex?$e_{male}-" title="$e_{male}-" /> ..., to find the direction of bias (can be 1D or higher).
 2. Neutralize: for every word that is not definitional, project to get rid of bias.
 3. Equalise pairs.
 
 **Neutralizing bias for non-gender specific words** 
-If we're using a 50-dimensional word embedding, the 50 dimensional space can be split into two parts: The bias-direction $g$, and the remaining 49 dimensions, which we'll call $g_{\perp}$. In linear algebra, we say that the 49 dimensional <img src="https://latex.codecogs.com/gif.latex?$g_{\perp}$" title="$g_{\perp}$" /> is perpendicular (or "othogonal") to $g$, meaning it is at 90 degrees to $g$. The neutralization step takes a vector such as <img src="https://latex.codecogs.com/gif.latex?$e_{receptionist}$" title="$e_{receptionist}$" /> and zeros out the component in the direction of $g$, giving us $e_{receptionist}^{debiased}$.
-
+If we're using a 50-dimensional word embedding, the 50 dimensional space can be split into two parts: The bias-direction and the remaining 49 dimensions, which we'll call In linear algebra, we say that the 49 dimensional <img src="https://latex.codecogs.com/gif.latex?$g_{\perp}$" title="$g_{\perp}$" /> is perpendicular (or "othogonal") to meaning it is at 90 degrees to The neutralization step takes a vector such as <img src="https://latex.codecogs.com/gif.latex?$e_{receptionist}$" title="$e_{receptionist}$" /> and zeros out the component in the direction of giving us
 Even though <img src="https://latex.codecogs.com/gif.latex?$g_{\perp}$" title="$g_{\perp}$" /> is 49 dimensional, given the limitations of what we can draw on a screen, we illustrate it using a 1 dimensional axis below.
 
 <p align="center"><img src="figures/neutral.png" style="width:600px"></p>
 
 We compute <img src="https://latex.codecogs.com/gif.latex?$e^{debiased}$" title="$e^{debiased}$" /> by first computing <img src="https://latex.codecogs.com/gif.latex?$e^{bias\_component}$" title="$e^{bias\_component}$" /> as the projection of <img src="https://latex.codecogs.com/gif.latex?$e$" title="$e$" /> onto the direction <img src="https://latex.codecogs.com/gif.latex?$g$" title="$g$" /> and then substracting the bias componenet: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$e^{bias\_component}&space;=&space;\frac{e&space;\cdot&space;g}{||g||_2^2}&space;*&space;g$$
-" title="$$e^{bias\_component} = \frac{e \cdot g}{||g||_2^2} * g$$
-" />
-<img src="https://latex.codecogs.com/gif.latex?$$e^{debiased}&space;=&space;e&space;-&space;e^{bias\_component}$$
-" title="$$e^{debiased} = e - e^{bias\_component}$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$e^{bias\_component}&space;=&space;\frac{e&space;\cdot&space;g}{||g||_2^2}&space;*&space;g$$" title="$$e^{bias\_component} = \frac{e \cdot g}{||g||_2^2} * g$$" />
+<img src="https://latex.codecogs.com/gif.latex?$$e^{debiased}&space;=&space;e&space;-&space;e^{bias\_component}$$" title="$$e^{debiased} = e - e^{bias\_component}$$" />
 
 **Equalization algorithm for gender-specific words**: Equalization is applied to pairs of words that we might want to have differ only through the gender property. As a concrete example, suppose that "actress" is closer to "babysit" than "actor." By applying neutralizing to "babysit" we can reduce the gender-stereotype associated with babysitting. But this still does not guarantee that "actor" and "actress" are equidistant from "babysit." The equalization algorithm takes care of this.
 
-The key idea behind equalization is to make sure that a particular pair of words are equi-distant from the 49-dimensional $g_{\perp}$. The equalization step also ensures that the two equalized steps are now the same distance from $e_{receptionist}^{debiased}$, or from any other work that has been neutralized. In pictures, this is how equalization works:
+The key idea behind equalization is to make sure that a particular pair of words are equi-distant from the 49-dimensional The equalization step also ensures that the two equalized steps are now the same distance from or from any other work that has been neutralized. In pictures, this is how equalization works:
 
 <p align="center"><img src="figures/equalization.png" style="width:600px"></p>
 
@@ -458,7 +407,7 @@ This is done using the following equations [details](https://arxiv.org/abs/1607.
 
 <p align="center"><img src="figures/equalization_algo.png" style="width:550px"></p>
 
-These debiasing algorithms are very helpful for reducing bias, but are not perfect and do not eliminate all traces of bias. For example, one weakness of this implementation was that the bias direction <img src="https://latex.codecogs.com/gif.latex?$g$" title="$g$" /> was defined using only the pair of words _woman_ and _man_. As discussed earlier, if <img src="https://latex.codecogs.com/gif.latex?$g$" title="$g$" /> were defined by computing $g_1 = e_{woman} - e_{man}$; $g_2 = e_{mother} - e_{father}$; $g_3 = e_{girl} - e_{boy}$; and so on and averaging over them, we would obtain a better estimate of the "gender" dimension in the 50 dimensional word embedding space.
+These debiasing algorithms are very helpful for reducing bias, but are not perfect and do not eliminate all traces of bias. For example, one weakness of this implementation was that the bias direction <img src="https://latex.codecogs.com/gif.latex?$g$" title="$g$" /> was defined using only the pair of words _woman_ and _man_. As discussed earlier, if <img src="https://latex.codecogs.com/gif.latex?$g$" title="$g$" /> were defined by computing = e_{woman} - e_{man}$; = e_{mother} - e_{father}$; = e_{girl} - e_{boy}$; and so on and averaging over them, we would obtain a better estimate of the "gender" dimension in the 50 dimensional word embedding space.
 
 ___
 ## WEEK 3
@@ -473,23 +422,19 @@ or for image captionning where the encoder is a CNN and the decoder is a RNN.
 
 <p align="center"><img src="figures/image_cap.png" width="550"></p>
 
-A decoder is similar to a language model which models (a probability of a sequence of words P(y1, .... yTy)), but instead of taking a first input state a0 as a zero vector, it takes the ouput of the encoder. so the output of the decoder will be conditionned on the input $P \left( y ^ { < 1 > } , \ldots , y ^ { < T _ { y } > } | x \right)$, now to generate a translation, we can simply sample randomly the ouputs y at each time step and feed them as inputs in the next time step, because will have different translation each time we run the model, so we wan to find the sentence that maximises the conditionnal probability:
+A decoder is similar to a language model which models (a probability of a sequence of words P(y1, .... yTy)), but instead of taking a first input state a0 as a zero vector, it takes the ouput of the encoder. so the output of the decoder will be conditionned on the input \left( y ^ { < 1 > } , \ldots , y ^ { < T _ { y } > } | x \right)$, now to generate a translation, we can simply sample randomly the ouputs y at each time step and feed them as inputs in the next time step, because will have different translation each time we run the model, so we wan to find the sentence that maximises the conditionnal probability:
 
-<img src="https://latex.codecogs.com/gif.latex?$$\arg&space;\max&space;_&space;{&space;y&space;^&space;{&space;<1&space;>}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;T&space;y&space;>}&space;&space;}&space;P&space;\left(&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;T&space;_&space;{&space;y&space;}&space;>&space;}&space;|&space;x&space;\right)$$
-" title="$$\arg \max _ { y ^ { <1 >} , \ldots , y ^ { < T y >}  } P \left( y ^ { < 1 > } , \ldots , y ^ { < T _ { y } > } | x \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\arg&space;\max&space;_&space;{&space;y&space;^&space;{&space;<1&space;>}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;T&space;y&space;>}&space;&space;}&space;P&space;\left(&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;T&space;_&space;{&space;y&space;}&space;>&space;}&space;|&space;x&space;\right)$$" title="$$\arg \max _ { y ^ { <1 >} , \ldots , y ^ { < T y >}  } P \left( y ^ { < 1 > } , \ldots , y ^ { < T _ { y } > } | x \right)$$" />
 
 The same objective can be expressed as:
-<img src="https://latex.codecogs.com/gif.latex?$$\operatorname&space;{&space;arg&space;}&space;\max&space;_&space;{&space;y&space;}&space;\prod&space;_&space;{&space;t&space;=&space;1&space;}&space;^&space;{&space;T&space;_&space;{&space;y&space;}&space;}&space;P&space;\left(&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;|&space;x&space;,&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;t&space;-&space;1&space;>&space;}&space;\right)$$
-" title="$$\operatorname { arg } \max _ { y } \prod _ { t = 1 } ^ { T _ { y } } P \left( y ^ { < t > } | x , y ^ { < 1 > } , \ldots , y ^ { < t - 1 > } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\operatorname&space;{&space;arg&space;}&space;\max&space;_&space;{&space;y&space;}&space;\prod&space;_&space;{&space;t&space;=&space;1&space;}&space;^&space;{&space;T&space;_&space;{&space;y&space;}&space;}&space;P&space;\left(&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;|&space;x&space;,&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;t&space;-&space;1&space;>&space;}&space;\right)$$" title="$$\operatorname { arg } \max _ { y } \prod _ { t = 1 } ^ { T _ { y } } P \left( y ^ { < t > } | x , y ^ { < 1 > } , \ldots , y ^ { < t - 1 > } \right)$$" />
 
 One solution is greddy search, in which at each time step we choose the word with the heighest probability. But this results in not very good results and maybe choosing the most probable word does not maximise the conditionnal probability as a whole.
 
 #### Beam search
 Beam search is one way to maximise the conditionnal probability, let's take a translation example, "Jane visite l'Afrique en Septembre", and hopefully the output will be "Jane visits Africa in Setember".
 
-First we input the french sentence in the encoder, and then the decoder receives the ouput of encoder and we obtain a probability distribution over all 10,000 words for the first word, with a beam width B = 3 in Beam search, we'll keep the 3 most probable words P(y1 | x), and then use three networks to predict the next word, for each one, the input to the next time step is one of the words we kept, to get P(y2 | y1, x), and then we can calculate $P(y2, y1 | x) = P(y2 | y1, x)  P(y1 | x)$
+First we input the french sentence in the encoder, and then the decoder receives the ouput of encoder and we obtain a probability distribution over all 10,000 words for the first word, with a beam width B = 3 in Beam search, we'll keep the 3 most probable words P(y1 | x), and then use three networks to predict the next word, for each one, the input to the next time step is one of the words we kept, to get P(y2 | y1, x), and then we can calculate y1 | x) = P(y2 | y1, x)  P(y1 | x)$
 
 <p align="center"><img src="figures/beam_step1.png" width="550"></p>
 
@@ -501,15 +446,11 @@ After the second step, we choose the three most probable pairs of words P(y2, y1
 
 *Length normalization:* In practice instead of maximise the product of probabilities, we maximsise the sum of log of the probabilities: 
 
-<img src="https://latex.codecogs.com/gif.latex?$$\arg&space;\max&space;_&space;{&space;y&space;}&space;\sum&space;_&space;{&space;y&space;=&space;1&space;}&space;^&space;{&space;T&space;_&space;{&space;y&space;}&space;}&space;\log&space;P&space;\left(&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;|&space;x&space;,&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;t&space;-&space;1&space;>&space;}&space;\right)$$
-" title="$$\arg \max _ { y } \sum _ { y = 1 } ^ { T _ { y } } \log P \left( y ^ { < t > } | x , y ^ { < 1 > } , \ldots , y ^ { < t - 1 > } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\arg&space;\max&space;_&space;{&space;y&space;}&space;\sum&space;_&space;{&space;y&space;=&space;1&space;}&space;^&space;{&space;T&space;_&space;{&space;y&space;}&space;}&space;\log&space;P&space;\left(&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;|&space;x&space;,&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;t&space;-&space;1&space;>&space;}&space;\right)$$" title="$$\arg \max _ { y } \sum _ { y = 1 } ^ { T _ { y } } \log P \left( y ^ { < t > } | x , y ^ { < 1 > } , \ldots , y ^ { < t - 1 > } \right)$$" />
 
 Given that most probabilities are less then one, multiplying them can result in numerical overflow, so using a log function, we can obtain the same results given that the log is a monotonically increasing function while having numerical stability. One downside of these two equations, is that we prefer shorter sentences, given when we multiply probabilities / add log probabilities, the value deacreses, for that it is better to take the average of the log of probabilities, with a heuristic alpha to adjust how much we prefer shorter sentences.
 
-<img src="https://latex.codecogs.com/gif.latex?$$\frac&space;{&space;1&space;}&space;{&space;T&space;_&space;{&space;y&space;}&space;^&space;{&space;\alpha&space;}&space;}&space;\sum&space;_&space;{&space;t&space;=&space;1&space;}&space;^&space;{&space;T&space;_&space;{&space;y&space;}&space;}&space;\log&space;P&space;\left(&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;|&space;x&space;,&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;t&space;-&space;1&space;>&space;}&space;\right)$$
-" title="$$\frac { 1 } { T _ { y } ^ { \alpha } } \sum _ { t = 1 } ^ { T _ { y } } \log P \left( y ^ { < t > } | x , y ^ { < 1 > } , \ldots , y ^ { < t - 1 > } \right)$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\frac&space;{&space;1&space;}&space;{&space;T&space;_&space;{&space;y&space;}&space;^&space;{&space;\alpha&space;}&space;}&space;\sum&space;_&space;{&space;t&space;=&space;1&space;}&space;^&space;{&space;T&space;_&space;{&space;y&space;}&space;}&space;\log&space;P&space;\left(&space;y&space;^&space;{&space;<&space;t&space;>&space;}&space;|&space;x&space;,&space;y&space;^&space;{&space;<&space;1&space;>&space;}&space;,&space;\ldots&space;,&space;y&space;^&space;{&space;<&space;t&space;-&space;1&space;>&space;}&space;\right)$$" title="$$\frac { 1 } { T _ { y } ^ { \alpha } } \sum _ { t = 1 } ^ { T _ { y } } \log P \left( y ^ { < t > } | x , y ^ { < 1 > } , \ldots , y ^ { < t - 1 > } \right)$$" />
 
 *How to choose the width B:* with a large B, we get better result but the running time is slower, and with smaller B, the results are worse but the faster, but in general, we might get diminishing returns when we get to some value B.
 
@@ -520,16 +461,15 @@ Side note: unlike exact search algorithms, Like BFS (breadth first search) or DF
 Error analysis is important so we can figure out whether it is the beam search algorithm that's causing problems and worth spending time on.
 Or whether it might be the RNN model that is causing problems and worth spending time on.
 
-How to perform error analysis? given a predicted ouput <img src="https://latex.codecogs.com/gif.latex?$\hat{y}$" title="$\hat{y}$" /> and possible correct translation given by a human $y^*$:
-
+How to perform error analysis? given a predicted ouput <img src="https://latex.codecogs.com/gif.latex?$\hat{y}$" title="$\hat{y}$" /> and possible correct translation given by a human
 * Human: Jane visits Africa in September. ($y^*$)
 * Algorithm: Jane visited Africa last September. ($\hat{y}$)
 
     - Case 1:
-        - Beam search chose $\hat{y}$, but <img src="https://latex.codecogs.com/gif.latex?$y^*$" title="$y^*$" /> attains higher probability.
+        - Beam search chose but <img src="https://latex.codecogs.com/gif.latex?$y^*$" title="$y^*$" /> attains higher probability.
         - conslusion: Beam search is at fault.
     - Case 2:
-        - <img src="https://latex.codecogs.com/gif.latex?$y^*$" title="$y^*$" /> is a better translation than $\hat{y}$, But RNN predicted $p(y^*|x) < p(\hat{y}| x)$.
+        - <img src="https://latex.codecogs.com/gif.latex?$y^*$" title="$y^*$" /> is a better translation than But RNN predicted < p(\hat{y}| x)$.
         - conslusion: RNN search is at fault.
 
 We can do that for many examples, and find out what fraction of errors are due to beam search vs RNN model, and than do a deeper error analysis for each part.
@@ -539,9 +479,7 @@ One of the challenges of machine translation is that given a French sentence, th
 
 Blue gives the N-gram overlap between machine translation output and reference translation, first we compute precision for n-grams of size 1 to 4, and then calculate the blue score:
 
-<img src="https://latex.codecogs.com/gif.latex?$$\mathrm&space;{&space;BLEU&space;}&space;=&space;\min&space;\left(&space;1&space;,&space;\frac&space;{&space;\text&space;{&space;output-length&space;}&space;}&space;{&space;\text&space;{&space;reference-length}&space;}&space;\right)&space;\left(&space;\prod&space;_&space;{&space;i&space;=&space;1&space;}&space;^&space;{&space;4&space;}&space;\operatorname&space;{&space;precision&space;}&space;_&space;{&space;i&space;}&space;\right)&space;^&space;{&space;\frac&space;{&space;1&space;}&space;{&space;4&space;}&space;}$$
-" title="$$\mathrm { BLEU } = \min \left( 1 , \frac { \text { output-length } } { \text { reference-length} } \right) \left( \prod _ { i = 1 } ^ { 4 } \operatorname { precision } _ { i } \right) ^ { \frac { 1 } { 4 } }$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$\mathrm&space;{&space;BLEU&space;}&space;=&space;\min&space;\left(&space;1&space;,&space;\frac&space;{&space;\text&space;{&space;output-length&space;}&space;}&space;{&space;\text&space;{&space;reference-length}&space;}&space;\right)&space;\left(&space;\prod&space;_&space;{&space;i&space;=&space;1&space;}&space;^&space;{&space;4&space;}&space;\operatorname&space;{&space;precision&space;}&space;_&space;{&space;i&space;}&space;\right)&space;^&space;{&space;\frac&space;{&space;1&space;}&space;{&space;4&space;}&space;}$$" title="$$\mathrm { BLEU } = \min \left( 1 , \frac { \text { output-length } } { \text { reference-length} } \right) \left( \prod _ { i = 1 } ^ { 4 } \operatorname { precision } _ { i } \right) ^ { \frac { 1 } { 4 } }$$" />
 
 Example:
 * System A: Israeli officials responsibility of airport safety.
@@ -561,19 +499,15 @@ The main idea of attention models is that instead of using the output vector of 
 
 So, the better approach would be to aggregate the word vectors into a fixed length vector based on some context. Attention Model is just a way of doing the aggregation. It provides a recipe for aggregating the output vectors of each word into a single vector based on some context. in the context of machine translation, the translated word at position t is dependent on the aggregation of all output vector of the input sequence. In this way, the network can choose what words are important and use information only from those words to construct the fixed length vector / pay attention only to a part of the input system.
 
-$\alpha^{<t, t^\prime>}$ = amount of attention <img src="https://latex.codecogs.com/gif.latex?$y^{t}$" title="$y^{t}$" /> should pay to <img src="https://latex.codecogs.com/gif.latex?$a^{<t^\prime>}$" title="$a^{<t^\prime>}$" />
+<img src="https://latex.codecogs.com/gif.latex?$\alpha^{<t," title="$\alpha^{<t," /> = amount of attention <img src="https://latex.codecogs.com/gif.latex?$y^{t}$" title="$y^{t}$" /> should pay to
 <p align="center"><img src="figures/attention.png" width="450"></p>
 
 For a bidirectionnal RNN, each activation contains the forward and backward componenet :
-<img src="https://latex.codecogs.com/gif.latex?$$a&space;^&space;{&space;<t^\prime>&space;}&space;=&space;(&space;\vec{a}^{<t>}&space;,&space;a^{<t^\prime>})$$
-" title="$$a ^ { <t^\prime> } = ( \vec{a}^{<t>} , a^{<t^\prime>})$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$a&space;^&space;{&space;<t^\prime>&space;}&space;=&space;(&space;\vec{a}^{<t>}&space;,&space;a^{<t^\prime>})$$" title="$$a ^ { <t^\prime> } = ( \vec{a}^{<t>} , a^{<t^\prime>})$$" />
 
-And then the context is computed as a weighted sum of the activation given the attention weights $\sum _ { t } \alpha ^ { < 1 , t ^ { \prime } > } = 1$ (here for the first ouput, t = 1):
+And then the context is computed as a weighted sum of the activation given the attention weights _ { t } \alpha ^ { < 1 , t ^ { \prime } > } = <img src="https://latex.codecogs.com/gif.latex?$\sum_{t}\alpha^{<1,t^{\prime}>}=" title="$\sum_{t}\alpha^{<1,t^{\prime}>}=" /> (here for the first ouput, t = 1):
 
-<img src="https://latex.codecogs.com/gif.latex?$$c&space;^&space;{&space;(&space;1&space;)&space;}&space;=&space;\sum&space;_&space;{&space;t&space;^&space;{&space;\prime&space;}&space;}&space;\alpha&space;^&space;{&space;<&space;1&space;,&space;t&space;>&space;}&space;a&space;^&space;{&space;\left\langle&space;t&space;^&space;{&space;\prime&space;}&space;\right\rangle&space;}$$
-" title="$$c ^ { ( 1 ) } = \sum _ { t ^ { \prime } } \alpha ^ { < 1 , t > } a ^ { \left\langle t ^ { \prime } \right\rangle }$$
-" />
+<img src="https://latex.codecogs.com/gif.latex?$$c&space;^&space;{&space;(&space;1&space;)&space;}&space;=&space;\sum&space;_&space;{&space;t&space;^&space;{&space;\prime&space;}&space;}&space;\alpha&space;^&space;{&space;<&space;1&space;,&space;t&space;>&space;}&space;a&space;^&space;{&space;\left\langle&space;t&space;^&space;{&space;\prime&space;}&space;\right\rangle&space;}$$" title="$$c ^ { ( 1 ) } = \sum _ { t ^ { \prime } } \alpha ^ { < 1 , t > } a ^ { \left\langle t ^ { \prime } \right\rangle }$$" />
 
 How to compute attention weights? we use a softmax using the old hidden state of the attention model and the current state of the RNN, and then train a small neural net to learn the weights.
 
@@ -583,7 +517,7 @@ One problem is the quadratic loss, where the number of weights is Tx * Ty, in ma
 
 
 
-**Illustration of Attention mechanism**: Here is a  more detailed illustration of the attenstion mecanism. The diagram on the left shows the attention model. The diagram on the right shows what one "Attention" step does to calculate the attention variables $\alpha^{\langle t, t' \rangle}$, which are used to compute the context variable $context^{\langle t \rangle}$ for each timestep in the output ($t=1, \ldots, T_y$).
+**Illustration of Attention mechanism**: Here is a  more detailed illustration of the attenstion mecanism. The diagram on the left shows the attention model. The diagram on the right shows what one "Attention" step does to calculate the attention variables t, t' \rangle}$, which are used to compute the context variable t <img src="https://latex.codecogs.com/gif.latex?$context^{\langlet" title="$context^{\langlet" /> for each timestep in the output ($t=1, \ldots, T_y$).
 
 <table>
 <td> 
@@ -599,11 +533,11 @@ Here are some properties of the model:
 
 - There are two separate LSTMs in this model (see diagram on the left). Because the one at the bottom of the picture is a Bi-directional LSTM and comes *before* the attention mechanism, we will call it *pre-attention* Bi-LSTM. The LSTM at the top of the diagram comes *after* the attention mechanism, so we will call it the *post-attention* LSTM. The pre-attention Bi-LSTM goes through <img src="https://latex.codecogs.com/gif.latex?$T_x$" title="$T_x$" /> time steps; the post-attention LSTM goes through <img src="https://latex.codecogs.com/gif.latex?$T_y$" title="$T_y$" /> time steps. 
 
-- The post-attention LSTM passes $s^{\langle t \rangle}, c^{\langle t \rangle}$ from one time step to the next. In the lecture videos, we were using only a basic RNN for the post-activation sequence model, so the state captured by the RNN output activations $s^{\langle t\rangle}$. But since we are using an LSTM here, the LSTM has both the output activation $s^{\langle t\rangle}$ and the hidden cell state $c^{\langle t\rangle}$. However, unlike previous text generation examples, in this model the post-activation LSTM at time <img src="https://latex.codecogs.com/gif.latex?$t$" title="$t$" /> does will not take the specific generated $y^{\langle t-1 \rangle}$ as input; it only takes $s^{\langle t\rangle}$ and $c^{\langle t\rangle}$ as input. We have designed the model this way, because (unlike language generation where adjacent characters are highly correlated) there isn't as strong a dependency between the previous character and the next character in a YYYY-MM-DD date. 
+- The post-attention LSTM passes t \rangle}, c^{\langle t <img src="https://latex.codecogs.com/gif.latex?$s^{\langlet\rangle},c^{\langlet" title="$s^{\langlet\rangle},c^{\langlet" /> from one time step to the next. In the lecture videos, we were using only a basic RNN for the post-activation sequence model, so the state captured by the RNN output activations t\rangle}$. But since we are using an LSTM here, the LSTM has both the output activation <img src="https://latex.codecogs.com/gif.latex?$s^{\langle" title="$s^{\langle" /> and the hidden cell state t\rangle}$. However, unlike previous text generation examples, in this model the post-activation LSTM at time <img src="https://latex.codecogs.com/gif.latex?$t$" title="$t$" /> does will not take the specific generated t-1 <img src="https://latex.codecogs.com/gif.latex?$y^{\langlet-1" title="$y^{\langlet-1" /> as input; it only takes <img src="https://latex.codecogs.com/gif.latex?$s^{\langle" title="$s^{\langle" /> and <img src="https://latex.codecogs.com/gif.latex?$c^{\langle" title="$c^{\langle" /> as input. We have designed the model this way, because (unlike language generation where adjacent characters are highly correlated) there isn't as strong a dependency between the previous character and the next character in a YYYY-MM-DD date. 
 
-- We use $a^{\langle t \rangle} = [\overrightarrow{a}^{\langle t \rangle}; \overleftarrow{a}^{\langle t \rangle}]$ to represent the concatenation of the activations of both the forward-direction and backward-directions of the pre-attention Bi-LSTM. 
+- We use t \rangle} = [\overrightarrow{a}^{\langle t \rangle}; \overleftarrow{a}^{\langle t <img src="https://latex.codecogs.com/gif.latex?$a^{\langlet\rangle}=[\overrightarrow{a}^{\langlet\rangle};\overleftarrow{a}^{\langlet" title="$a^{\langlet\rangle}=[\overrightarrow{a}^{\langlet\rangle};\overleftarrow{a}^{\langlet" /> to represent the concatenation of the activations of both the forward-direction and backward-directions of the pre-attention Bi-LSTM. 
 
-- The diagram on the right uses a `RepeatVector` node to copy $s^{\langle t-1 \rangle}$'s value <img src="https://latex.codecogs.com/gif.latex?$T_x$" title="$T_x$" /> times, and then `Concatenation` to concatenate $s^{\langle t-1 \rangle}$ and $a^{\langle t \rangle}$ to compute $e^{\langle t, t'\rangle}$, which is then passed through a softmax to compute $\alpha^{\langle t, t' \rangle}$.
+- The diagram on the right uses a `RepeatVector` node to copy t-1 \rangle}$'s value <img src="https://latex.codecogs.com/gif.latex?$T_x$" title="$T_x$" /> times, and then `Concatenation` to concatenate t-1 <img src="https://latex.codecogs.com/gif.latex?$s^{\langlet-1" title="$s^{\langlet-1" /> and t <img src="https://latex.codecogs.com/gif.latex?$a^{\langlet" title="$a^{\langlet" /> to compute t, t'\rangle}$, which is then passed through a softmax to compute t, t' \rangle}$.
 
 ### Speech recognition
 
@@ -625,20 +559,20 @@ The spectogram represents how active each frequency is (y axis) over a number of
 
 Spectrogram of an audio recording, where the color shows the degree to which different frequencies are present (loud) in the audio at different points in time. Green squares means a certain frequency is more active or more present in the audio clip (louder); blue squares denote less active frequencies. 
 
-The dimension of the output spectrogram depends upon the hyperparameters of the spectrogram software and the length of the input. Given 10 second audio clips as the "standard length" for the training examples. The number of timesteps of the spectrogram will be 5511, so $T_x = 5511$.
+The dimension of the output spectrogram depends upon the hyperparameters of the spectrogram software and the length of the input. Given 10 second audio clips as the "standard length" for the training examples. The number of timesteps of the spectrogram will be 5511, so = 5511$.
 
-With 10 seconds being the default training example length, 10 seconds of time can be discretized to different numbers of value. With 441000 hz (raw audio) and 5511 (spectrogram). In the former case, each step represents $10/441000 \approx 0.000023$ seconds. In the second case, each step represents $10/5511 \approx 0.0018$ seconds. 
+With 10 seconds being the default training example length, 10 seconds of time can be discretized to different numbers of value. With 441000 hz (raw audio) and 5511 (spectrogram). In the former case, each step represents \approx <img src="https://latex.codecogs.com/gif.latex?$10/441000\approx" title="$10/441000\approx" /> seconds. In the second case, each step represents \approx <img src="https://latex.codecogs.com/gif.latex?$10/5511\approx" title="$10/5511\approx" /> seconds. 
 
 For the 10sec of audio:
 
 - <img src="https://latex.codecogs.com/gif.latex?$441000$" title="$441000$" /> (raw audio)
 - 10000 used to synthesize audio
-- $5511 = T_x$ (spectrogram output, and dimension of input to the neural network). 
-- $1375 = T_y$ (the number of steps in the output of the GRU). 
+- = <img src="https://latex.codecogs.com/gif.latex?$5511=" title="$5511=" /> (spectrogram output, and dimension of input to the neural network). 
+- = <img src="https://latex.codecogs.com/gif.latex?$1375=" title="$1375=" /> (the number of steps in the output of the GRU). 
 
 Each of these representations correspond to exactly 10 seconds of time. It's just that they are discretizing them to different degrees. All of these are hyperparameters and can be changed (except the 441000, which is a function of the microphone). We have chosen values that are within the standard ranges uses for speech systems. 
 
-Consider the $T_y = 1375$ number above. This means that for the output of the model, we discretize the 10s into 1375 time-intervals (each one of length $10/1375 \approx 0.0072$s) and try to predict for each of these intervals whether someone recently finished saying "activate."
+Consider the = <img src="https://latex.codecogs.com/gif.latex?$T_y=" title="$T_y=" /> number above. This means that for the output of the model, we discretize the 10s into 1375 time-intervals (each one of length \approx 0.0072$s) and try to predict for each of these intervals whether someone recently finished saying "activate."
 
 Consider also the 10000 number above. This corresponds to discretizing the 10sec clip into 10/10000 = 0.001 second itervals. it means we are using 10,000 steps. To be used to generate training examples.
 
@@ -650,14 +584,14 @@ To synthesize a single training example:
 - Randomly insert 0-4 audio clips of "activate" into this 10sec clip
 - Randomly insert 0-2 audio clips of negative words into this 10sec clip
 
-Because we synthesized the word "activate" into the background clip, we know exactly when in the 10sec clip the "activate" makes its appearance. Given that $y^{\langle t \rangle}$ represent whether or not someone has just finished saying "activate." Given a background clip, we can initialize $y^{\langle t \rangle}=0$ for all $t$, since the clip doesn't contain any "activates.", When we insert or overlay an "activate" clip, we will also update labels for $y^{\langle t \rangle}$, so that 50 steps (50 steps because we would be quite satisfied if the GRU detects "activate" anywhere within a short time-internal after finishing saying activate moment) of the output now have target label 1. And we will train a GRU to detect when someone has *finished* saying "activate".
+Because we synthesized the word "activate" into the background clip, we know exactly when in the 10sec clip the "activate" makes its appearance. Given that t <img src="https://latex.codecogs.com/gif.latex?$y^{\langlet" title="$y^{\langlet" /> represent whether or not someone has just finished saying "activate." Given a background clip, we can initialize t <img src="https://latex.codecogs.com/gif.latex?$y^{\langlet" title="$y^{\langlet" /> for all since the clip doesn't contain any "activates.", When we insert or overlay an "activate" clip, we will also update labels for t \rangle}$, so that 50 steps (50 steps because we would be quite satisfied if the GRU detects "activate" anywhere within a short time-internal after finishing saying activate moment) of the output now have target label 1. And we will train a GRU to detect when someone has *finished* saying "activate".
 
 #### Model
 
 <p align="center"><img src="figures/model_triger_words.png" width="550"></p>
 
-One key step of this model is the 1D convolutional step. It inputs the 5511 step spectrogram, and outputs a 1375 step output, which is then further processed by multiple layers to get the final $T_y = 1375$ step output. This layer plays a role similar to the 2D convolutions you saw in CNNs, of extracting low-level features and then possibly generating an output of a smaller dimension.
+One key step of this model is the 1D convolutional step. It inputs the 5511 step spectrogram, and outputs a 1375 step output, which is then further processed by multiple layers to get the final = <img src="https://latex.codecogs.com/gif.latex?$T_y=" title="$T_y=" /> step output. This layer plays a role similar to the 2D convolutions you saw in CNNs, of extracting low-level features and then possibly generating an output of a smaller dimension.
 
-Computationally, the 1-D conv layer also helps speed up the model because now the GRU  has to process only 1375 timesteps rather than 5511 timesteps. The two GRU layers read the sequence of inputs from left to right, then ultimately uses a dense+sigmoid layer to make a prediction for $y^{\langle t \rangle}$. Because <img src="https://latex.codecogs.com/gif.latex?$y$" title="$y$" /> is binary valued (0 or 1), we use a sigmoid output at the last layer to estimate the chance of the output being 1, corresponding to the user having just said "activate."
+Computationally, the 1-D conv layer also helps speed up the model because now the GRU  has to process only 1375 timesteps rather than 5511 timesteps. The two GRU layers read the sequence of inputs from left to right, then ultimately uses a dense+sigmoid layer to make a prediction for t \rangle}$. Because <img src="https://latex.codecogs.com/gif.latex?$y$" title="$y$" /> is binary valued (0 or 1), we use a sigmoid output at the last layer to estimate the chance of the output being 1, corresponding to the user having just said "activate."
 
 Note that we use a uni-directional RNN rather than a bi-directional RNN. This is really important for trigger word detection, since we want to be able to detect the trigger word almost immediately after it is said. If we used a bi-directional RNN, we would have to wait for the whole 10sec of audio to be recorded before we could tell if "activate" was said in the first second of the audio clip.  
