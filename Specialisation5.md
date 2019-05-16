@@ -31,8 +31,8 @@ So, in summary:
     - Example: $x^{\langle t \rangle}$ is the input x at the $t^{th}$ time-step. $x^{(i)\langle t \rangle}$ is the input at the $t^{th}$ timestep of example $i$.
     
 - Lowerscript $i$ denotes the $i^{th}$ entry of a vector.
-    - Example: $a^{[l]}_i$ denotes the $i^{th}$ entry of the activations in layer $l$.
-
+    - Example: $a^{[l]}_ i$ denotes the $i^{th}$ entry of the activations in layer $l$.
+ 
 How to represent individual words in the sentence? first we choose a dictonnary containing all the words we're interested in, and then use one hot representation to represent the words in the input sequence. If we encountered words not in the dictionnary, we represent the word as \<unk\> token.
 
 <p align="center"> <img src="figures/words_rep.png" width="500"></p>
@@ -198,7 +198,6 @@ Finally, the new cell state is:
 
 $$ c^{\langle t \rangle} = \Gamma_f^{\langle t \rangle}* c^{\langle t-1 \rangle} + \Gamma_u^{\langle t \rangle} *\tilde{c}^{\langle t \rangle}$$
 
-
 #### - Output gate
 
 To decide which outputs we will use, we will use the following two formulas: 
@@ -227,13 +226,14 @@ To calculate $db_f, db_u, db_c, db_o$ we just need to sum across the horizontal 
 Finally, we will compute the derivative with respect to the previous hidden state, previous memory state, and input.
 
 $$ da_{prev} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c^{\langle t \rangle} + W_o^T * d\Gamma_o^{\langle t \rangle}$$
+
 Here, the weights for equations 13 are the first n_a, (i.e. $W_f = W_f[:n_a,:]$ etc...)
 
 $$ dc_{prev} = dc_{next}\Gamma_f^{\langle t \rangle} + \Gamma_o^{\langle t \rangle} * (1- \tanh(c_{next})^2)*\Gamma_f^{\langle t \rangle}*da_{next}$$
+
 $$ dx^{\langle t \rangle} = W_f^T*d\Gamma_f^{\langle t \rangle} + W_u^T * d\Gamma_u^{\langle t \rangle}+ W_c^T * d\tilde c_t + W_o^T * d\Gamma_o^{\langle t \rangle}$$
+
 where the weights for equation 15 are from n_a to the end, (i.e. $W_f = W_f[n_a:,:]$ etc...)
-
-
 
 ### Bidirectionnal RNNs
 Sometime to be able to predict the correct ouput, the network needs not only the previous states but also the upcoming ones, such as these two examples :
@@ -258,6 +258,16 @@ Instead of having only one hidden state per time step, we can stack many hidden 
 <p align="center"><img src="figures/deep_rnns.png" width="500"></p>
 
 For this type of networks, we only a limited number of layer (3 - 5) and even then the network is quite big, given the computation needed for long sequences.
+
+### Side note: Temperature in RNNs
+Temperature is a hyperparameter of LSTMs (and neural networks generally) used to control the randomness of predictions by scaling the logits before applying softmax. For example, in TensorFlow’s Magenta implementation of LSTMs, temperature represents how much to divide the logits by before computing the softmax.
+
+When the temperature is 1, we compute the softmax directly on the logits (the unscaled output of earlier layers), and using a temperature of 0.6 the model computes the softmax on (logits/0.6), resulting in a larger value. Performing softmax on larger values makes the LSTM more confident (less input is needed to activate the output layer) but also more conservative in its samples (it is less likely to sample from unlikely candidates). Using a higher temperature produces a softer probability distribution over the classes, and makes the RNN more “easily excited” by samples, resulting in more diversity and also more mistakes.
+
+In other words, neural networks produce class probabilities with logit vector z where z=(z1,…,zn) by performing the softmax function to produce probability vector q=(q1,…,qn) by comparing zi with with the other logits. qi= exp(zi/T) / ∑ exp(zj/T), where T is the temperature parameter, normally set to 1.
+
+The softmax function normalizes the candidates at each iteration of the network based on their exponential values by ensuring the network outputs are all between zero and one at every timestep.
+Temperature therefore increases the sensitivity to low probability candidates. In LSTMs, the candidate, or sample, can be a letter, a word, or musical note, for example: For high temperatures (τ→ Inf), all [samples] have nearly the same probability and the lower the temperature, the more expected rewards affect the probability. For a low temperature (τ→0+), the probability of the [sample] with the highest expected reward tends to 1. 
 
 ___
 
@@ -285,24 +295,24 @@ Transfer learning and word embeddings:
 
 Word embeddings can be used in analogies, given that the vector difference between man & women, is equal to the difference between king & queen. so E_man - E_women ~ E_king - E_queen, and if want to find the word Queen, we can optimise for the word to be similar to king as similar women is to man:
 
-$$ \operatorname{argmax}_w sim \left( e _ { w } , e _ { k i n g } - e _ { m a n } + e _ { w o m a n } \right)$$ 
+$$\operatorname{argmax} _ {w} sim \left( e _ { w } , e _ { k i n g } - e _ { man } + e _ { w o m a n } \right)$$
 
 There is various similarity functions, such as:
 
-**1- Euclidean distance** $\sqrt { \sum _ { i = 1 } ^ { k } \left( u _ { i } - v _ { i } \right) ^ { 2 } }$,
+**1- Euclidean distance**
+$$\sqrt { \sum _ { i = 1 } ^ { k } \left( u _ { i } - v _ { i } \right) ^ { 2 } }$$
 
-**2- Cosine similarity**
-Given two vectors $u$ and $v$, cosine similarity is defined as follows: 
+**2- Cosine similarity** Given two vectors $u$ and $v$, cosine similarity is defined as follows: 
 
-$$\text{CosineSimilarity(u, v)} = \frac {u . v} {||u||_2 ||v||_2} = cos(\theta)$$
+$$\text{CosineSimilarity(u, v)} = \frac {u . v} {||u|| _ 2 ||v|| _ 2} = cos(\theta)$$
 
-where $u.v$ is the dot product (or inner product) of two vectors, $||u||_2$ is the norm (or length) of the vector $u$, and $\theta$ is the angle between $u$ and $v$. This similarity depends on the angle between $u$ and $v$. If $u$ and $v$ are very similar, their cosine similarity will be close to 1; if they are dissimilar, the cosine similarity will take a smaller value. 
+where $u.v$ is the dot product (or inner product) of two vectors, $norm(u) _ 2$ is the norm (or length) of the vector $u$, and $\theta$ is the angle between $u$ and $v$. This similarity depends on the angle between $u$ and $v$. If $u$ and $v$ are very similar, their cosine similarity will be close to 1; if they are dissimilar, the cosine similarity will take a smaller value. 
 
 <p align="center"><img src="figures/cosine_sim.png" style="width:800px;height:250px;"></p>
 
 **Embedding matrix** Let's start to formalize the problem of learning a good word embedding. When we implement an algorithm to learn a word embedding, we end up learning is an embedding matrix.
 
-Given a corpus of 10,000 words, and we're learning a 300 dimenionnal embeddings, the embeddings matrix is of size 300 x 10,000, and to select a given embedding for word j, we multiply a 10,000 one hot vector where oj = 1, with the embedding matrix to select the j-column, $E \cdot O _ { j } = e _ { j }$, we initialize the matrix randomly and use gradient descent to learn the matrix. In practice, it is not efficient to use vector multiplication to extract the word embedding, but rather a specialized function to look up the embeddings.
+Given a corpus of 10,000 words, and we're learning a 300 dimenionnal embeddings, the embeddings matrix is of size 300 x 10,000, and to select a given embedding for word j, we multiply a 10,000 one hot vector where oj = 1, with the embedding matrix to select the j-column, $E\cdot O _ { j } = e _ { j }$, we initialize the matrix randomly and use gradient descent to learn the matrix. In practice, it is not efficient to use vector multiplication to extract the word embedding, but rather a specialized function to look up the embeddings.
 
 <p align="center"><img src="figures/emb_matrix.png" width="500"></p>
 
@@ -400,6 +410,7 @@ Even though $g_{\perp}$ is 49 dimensional, given the limitations of what we can 
 We compute $e^{debiased}$ by first computing $e^{bias\_component}$ as the projection of $e$ onto the direction $g$ and then substracting the bias componenet: 
 
 $$e^{bias\_component} = \frac{e \cdot g}{||g||_2^2} * g$$
+
 $$e^{debiased} = e - e^{bias\_component}$$
 
 **Equalization algorithm for gender-specific words**: Equalization is applied to pairs of words that we might want to have differ only through the gender property. As a concrete example, suppose that "actress" is closer to "babysit" than "actor." By applying neutralizing to "babysit" we can reduce the gender-stereotype associated with babysitting. But this still does not guarantee that "actor" and "actress" are equidistant from "babysit." The equalization algorithm takes care of this.
@@ -466,16 +477,16 @@ Side note: unlike exact search algorithms, Like BFS (breadth first search) or DF
 Error analysis is important so we can figure out whether it is the beam search algorithm that's causing problems and worth spending time on.
 Or whether it might be the RNN model that is causing problems and worth spending time on.
 
-How to perform error analysis? given a predicted ouput $\hat{y}$ and possible correct translation given by a human $y^*$:
+How to perform error analysis? given a predicted ouput $\^{h}$ and possible correct translation given by a human y\*:
 
-* Human: Jane visits Africa in September. ($y^*$)
-* Algorithm: Jane visited Africa last September. ($\hat{y}$)
+* Human: Jane visits Africa in September (y\*).
+* Algorithm: Jane visited Africa last September. ($\^{h}$)
 
     - Case 1:
-        - Beam search chose $\hat{y}$, but $y^*$ attains higher probability.
+        - Beam search chose $\^{h}$, but y\* attains higher probability.
         - conslusion: Beam search is at fault.
     - Case 2:
-        - $y^*$ is a better translation than $\hat{y}$, But RNN predicted $p(y^*|x) < p(\hat{y}| x)$.
+        - y\* is a better translation than $\^{h}$, But RNN predicted $p(y\*|x) < p(\^{h}| x)$.
         - conslusion: RNN search is at fault.
 
 We can do that for many examples, and find out what fraction of errors are due to beam search vs RNN model, and than do a deeper error analysis for each part.
