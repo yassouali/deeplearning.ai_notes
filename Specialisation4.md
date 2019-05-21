@@ -4,46 +4,46 @@
 <!-- TOC -->
 
 - [Specialisation 4: Convolutional Neural Networks](#specialisation-4-convolutional-neural-networks)
-   - [WEEK 1](#week-1)
-      - [Edge Detection](#edge-detection)
-      - [Padding](#padding)
-      - [Convolutions](#convolutions)
-         - [Strided convolutions](#strided-convolutions)
-         - [Convolutions over volume](#convolutions-over-volume)
-         - [Pooling layers](#pooling-layers)
-         - [Global average pooling](#global-average-pooling)
-         - [Convolutional layer backward pass](#convolutional-layer-backward-pass)
-   - [WEEK 2: Case studies](#week-2-case-studies)
-      - [LeNet 5](#lenet-5)
-      - [AlexNet](#alexnet)
-      - [VGG-16](#vgg-16)
-      - [ResNets](#resnets)
-         - [Identity block](#identity-block)
-         - [The convolutional block](#the-convolutional-block)
-      - [Networks in Networks](#networks-in-networks)
-      - [Inception](#inception)
-      - [Practical advies](#practical-advies)
-   - [WEEK 3](#week-3)
-      - [Object localization](#object-localization)
-      - [Landmark detection](#landmark-detection)
-      - [Object detection](#object-detection)
-         - [Sliding window](#sliding-window)
-         - [Bounding box prediction](#bounding-box-prediction)
-         - [Intersection Over Union](#intersection-over-union)
-         - [Anchor Boxes](#anchor-boxes)
-         - [Region Proposals](#region-proposals)
-      - [YOLO](#yolo)
-   - [WEEK 4](#week-4)
-      - [Face recognition](#face-recognition)
-         - [One shot learning](#one-shot-learning)
-         - [Siamese Network](#siamese-network)
-         - [Triplet loss](#triplet-loss)
-         - [Face Verification and Binary Classification](#face-verification-and-binary-classification)
-      - [Neural style transfer](#neural-style-transfer)
-         - [Cost functions](#cost-functions)
-         - [Content cost function](#content-cost-function)
-         - [Style cost function](#style-cost-function)
-      - [1D & 3D convolutions](#1d--3d-convolutions)
+      - [WEEK 1](#week-1)
+            - [Edge Detection](#edge-detection)
+            - [Padding](#padding)
+            - [Convolutions](#convolutions)
+                  - [Strided convolutions](#strided-convolutions)
+                  - [Convolutions over volume](#convolutions-over-volume)
+                  - [Pooling layers](#pooling-layers)
+                  - [Global average pooling](#global-average-pooling)
+                  - [Convolutional layer backward pass](#convolutional-layer-backward-pass)
+      - [WEEK 2: Case studies](#week-2-case-studies)
+            - [LeNet 5](#lenet-5)
+            - [AlexNet](#alexnet)
+            - [VGG-16](#vgg-16)
+            - [ResNets](#resnets)
+                  - [Identity block](#identity-block)
+                  - [The convolutional block](#the-convolutional-block)
+            - [Networks in Networks](#networks-in-networks)
+            - [Inception](#inception)
+            - [Practical advies](#practical-advies)
+      - [WEEK 3](#week-3)
+            - [Object localization](#object-localization)
+            - [Landmark detection](#landmark-detection)
+            - [Object detection](#object-detection)
+                  - [Sliding window](#sliding-window)
+                  - [Bounding box prediction](#bounding-box-prediction)
+                  - [Intersection Over Union](#intersection-over-union)
+                  - [Anchor Boxes](#anchor-boxes)
+                  - [Region Proposals](#region-proposals)
+            - [YOLO](#yolo)
+      - [WEEK 4](#week-4)
+            - [Face recognition](#face-recognition)
+                  - [One shot learning](#one-shot-learning)
+                  - [Siamese Network](#siamese-network)
+                  - [Triplet loss](#triplet-loss)
+                  - [Face Verification and Binary Classification](#face-verification-and-binary-classification)
+            - [Neural style transfer](#neural-style-transfer)
+                  - [Cost functions](#cost-functions)
+                  - [Content cost function](#content-cost-function)
+                  - [Style cost function](#style-cost-function)
+            - [1D & 3D convolutions](#1d--3d-convolutions)
 
 <!-- /TOC -->
 
@@ -138,7 +138,7 @@ An example of GAP, With a 3D 8,8,10 tensor, we compute the average over the 8,8 
 
 **Computing dA:**
 
-This is the formula for computing $dA$ with respect to the cost for a certain filter $W_c$ and a given training example:
+This is the formula for computing <img src="https://latex.codecogs.com/gif.latex?$dA$" title="$dA$" /> with respect to the cost for a certain filter <img src="https://latex.codecogs.com/gif.latex?$W_c$" title="$W_c$" /> and a given training example:
 
 <img src="https://latex.codecogs.com/gif.latex?$$dA&space;&plus;=&space;\sum&space;_{h=0}&space;^{n_H}&space;\sum_{w=0}&space;^{n_W}&space;W_c&space;\times&space;dZ_{hw}$$" title="$$dA += \sum _{h=0} ^{n_H} \sum_{w=0} ^{n_W} W_c \times dZ_{hw}$$" />
 
@@ -152,15 +152,15 @@ This is the formula for computing <img src="https://latex.codecogs.com/gif.latex
 
 <img src="https://latex.codecogs.com/gif.latex?$$&space;dW_c&space;&plus;=&space;\sum&space;_{h=0}&space;^{n_H}&space;\sum_{w=0}&space;^&space;{n_W}&space;a_{slice}&space;\times&space;dZ_{hw}&space;$$" title="$$ dW_c += \sum _{h=0} ^{n_H} \sum_{w=0} ^ {n_W} a_{slice} \times dZ_{hw} $$" />
 
-Where $a_{slice}$ corresponds to the slice which was used to generate the acitivation $Z_{ij}$. Hence, this ends up giving us the gradient for $W$ with respect to that slice. Since it is the same $W$, we will just add up all such gradients to get $dW$.
+Where <img src="https://latex.codecogs.com/gif.latex?$a_{slice}$" title="$a_{slice}$" /> corresponds to the slice which was used to generate the acitivation <img src="https://latex.codecogs.com/gif.latex?$Z_{ij}$" title="$Z_{ij}$" />. Hence, this ends up giving us the gradient for <img src="https://latex.codecogs.com/gif.latex?$W$" title="$W$" /> with respect to that slice. Since it is the same <img src="https://latex.codecogs.com/gif.latex?$W$" title="$W$" />, we will just add up all such gradients to get <img src="https://latex.codecogs.com/gif.latex?$dW$" title="$dW$" />.
 
 **Computing db:**
 
-This is the formula for computing $db$ with respect to the cost for a certain filter $W_c$:
+This is the formula for computing <img src="https://latex.codecogs.com/gif.latex?$db$" title="$db$" /> with respect to the cost for a certain filter <img src="https://latex.codecogs.com/gif.latex?$W_c$" title="$W_c$" />:
 
 <img src="https://latex.codecogs.com/gif.latex?$$&space;db&space;=&space;\sum_h&space;\sum_w&space;dZ_{hw}$$" title="$$ db = \sum_h \sum_w dZ_{hw}$$" />
 
-db is computed by summing $dZ$. In this case, you are just summing over all the gradients of the conv output (Z) with respect to the cost.
+db is computed by summing <img src="https://latex.codecogs.com/gif.latex?$dZ$" title="$dZ$" />. In this case, you are just summing over all the gradients of the conv output (Z) with respect to the cost.
 
 Here is a more infomative picture for computing the gradients with respect to the weights [source](https://becominghuman.ai/back-propagation-in-convolutional-neural-networks-intuition-and-code-714ef1c38199): 
 
@@ -386,7 +386,7 @@ YOLO ("you only look once") is a popular algorithm because it achieves high accu
 First things to know:
 
 - The **input** is a batch of images of shape (m, H, W, 3)
-- The **output** is a list of bounding boxes along with the recognized classes. Each bounding box is represented by 6 numbers <img src="https://latex.codecogs.com/gif.latex?$(p_c,&space;b_x,&space;b_y,&space;b_h,&space;b_w,&space;c)$" title="$(p_c, b_x, b_y, b_h, b_w, c)$" /> as seen above. If we expand $c$ into an 80-dimensional vector, each bounding box is then represented by 85 numbers.
+- The **output** is a list of bounding boxes along with the recognized classes. Each bounding box is represented by 6 numbers <img src="https://latex.codecogs.com/gif.latex?$(p_c,&space;b_x,&space;b_y,&space;b_h,&space;b_w,&space;c)$" title="$(p_c, b_x, b_y, b_h, b_w, c)$" /> as seen above. If we expand C into an 80-dimensional vector, each bounding box is then represented by 85 numbers.
 
 With 5 anchor boxes. YOLO architecture is the following: ```IMAGE (m, H, W, 3) -> DEEP CNN -> ENCODING (m, 19, 19, 5, 85)```. for simplicity the last two dimension are flattened to get : (m, 19, 19, 425)
 
@@ -467,7 +467,7 @@ Training will use triplets of images <img src="https://latex.codecogs.com/gif.la
 
 These triplets are picked from our training dataset. We write <img src="https://latex.codecogs.com/gif.latex?$(A^{(i)},&space;P^{(i)},&space;N^{(i)})$" title="$(A^{(i)}, P^{(i)}, N^{(i)})$" /> to denote the i-th training example.
 
-We'd like to make sure that an image <img src="https://latex.codecogs.com/gif.latex?$A^{(i)}$" title="$A^{(i)}$" /> of an individual is closer to the Positive $P^{(i)}$ than to the Negative image <img src="https://latex.codecogs.com/gif.latex?$N^{(i)}$" title="$N^{(i)}$" /> by at least a margin $\alpha$:
+We'd like to make sure that an image <img src="https://latex.codecogs.com/gif.latex?$A^{(i)}$" title="$A^{(i)}$" /> of an individual is closer to the Positive <img src="https://latex.codecogs.com/gif.latex?$P^{(i)}$" title="$P^{(i)}$" /> than to the Negative image <img src="https://latex.codecogs.com/gif.latex?$N^{(i)}$" title="$N^{(i)}$" /> by at least a margin <img src="https://latex.codecogs.com/gif.latex?$\alpha$" title="$\alpha$" />:
 
 <img src="https://latex.codecogs.com/gif.latex?$$\mid&space;\mid&space;f(A^{(i)})&space;-&space;f(P^{(i)})&space;\mid&space;\mid_2^2&space;&plus;&space;\alpha&space;<&space;\mid&space;\mid&space;f(A^{(i)})&space;-&space;f(N^{(i)})&space;\mid&space;\mid_2^2$$" title="$$\mid \mid f(A^{(i)}) - f(P^{(i)}) \mid \mid_2^2 + \alpha < \mid \mid f(A^{(i)}) - f(N^{(i)}) \mid \mid_2^2$$" />
 
