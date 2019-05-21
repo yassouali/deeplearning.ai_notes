@@ -253,7 +253,7 @@ To decide which outputs we will use, we will use the following two formulas:
 
 <img src="https://latex.codecogs.com/gif.latex?$$&space;a^{\langle&space;t&space;\rangle}&space;=&space;\Gamma_o^{\langle&space;t&space;\rangle}*&space;\tanh(c^{\langle&space;t&space;\rangle})$$" title="$$ a^{\langle t \rangle} = \Gamma_o^{\langle t \rangle}* \tanh(c^{\langle t \rangle})$$" />
 
-Where we decide what to output using a sigmoid function, and then we multiply that by the $\tanh$ of the previous state.
+Where we decide what to output using a sigmoid function, and then we multiply that by the <img src="https://latex.codecogs.com/gif.latex?$\tanh$" title="$\tanh$" /> of the previous state.
 
 #### LSTM backward pass
 
@@ -539,7 +539,7 @@ How to perform error analysis? given a predicted ouput <img src="https://latex.c
         - Beam search chose <img src="https://latex.codecogs.com/gif.latex?\hat{y}" title="\hat{y}" />, but <img src="https://latex.codecogs.com/gif.latex?$y^*$" title="$y^*$" /> attains higher probability.
         - conslusion: Beam search is at fault.
     - Case 2:
-        - <img src="https://latex.codecogs.com/gif.latex?$y^*$" title="$y^*$" /> is a better translation than <img src="https://latex.codecogs.com/gif.latex?$p(y^*|x)&space;<&space;p(\hat{y}|&space;x)$", But RNN predicted <img src="https://latex.codecogs.com/gif.latex?$p(y^*|x)&space;<&space;p(\hat{y}|&space;x)$" title="$p(y^*|x) < p(\hat{y}| x)$" />.
+        - <img src="https://latex.codecogs.com/gif.latex?$y^*$" title="$y^*$" /> is a better translation than <img src="https://latex.codecogs.com/gif.latex?$p(y^*|x)&space;<&space;p(\hat{y}|&space;x)$"/>, But RNN predicted <img src="https://latex.codecogs.com/gif.latex?$p(y^*|x)&space;<&space;p(\hat{y}|&space;x)$" title="$p(y^*|x) < p(\hat{y}| x)$" />.
         - conslusion: RNN search is at fault.
 
 We can do that for many examples, and find out what fraction of errors are due to beam search vs RNN model, and than do a deeper error analysis for each part.
@@ -589,7 +589,7 @@ How to compute attention weights? we use a softmax using the old hidden state of
 
 One problem is the quadratic loss, where the number of weights is Tx * Ty, in machine translation, this can be acceptable.
 
-**Illustration of Attention mechanism**: This is an example of using the attention mecanism to do from dates in the numerical format to characters, here is a more detailed illustration of the attenstion mecanism. The diagram on the left shows the attention model. The diagram on the right shows what one "Attention" step does to calculate the attention variables $\alpha^{\langle t, t' \rangle}$, which are used to compute the context variable $context^{\langle t \rangle}$ for each timestep in the output ($t=1, \ldots, T_y$).
+**Illustration of Attention mechanism**: This is an example of using the attention mecanism to do from dates in the numerical format to characters, here is a more detailed illustration of the attenstion mecanism. The diagram on the left shows the attention model. The diagram on the right shows what one "Attention" step does to calculate the attention variables <img src="https://latex.codecogs.com/gif.latex?$\alpha^{\langle&space;t,&space;t'&space;\rangle}$" title="$\alpha^{\langle t, t' \rangle}$" />, which are used to compute the context variable <img src="https://latex.codecogs.com/gif.latex?$context^{\langle&space;t&space;\rangle}$" title="$context^{\langle t \rangle}$" /> for each timestep in the output (<img src="https://latex.codecogs.com/gif.latex?$t=1,&space;\ldots,&space;T_y$" title="$t=1, \ldots, T_y$" />).
 
 <table>
 <td> 

@@ -1,6 +1,6 @@
 ## Deep Learning Specialization course notes
 
-These are my notes of the five specialization of the Deep Learning course by Andrew Ng, for more information, please visit the course official pages:
+These are my notes of the five specializations of the Deep Learning course by Andrew Ng, for more information please visit the course official pages:
 
 - [deeplearning.ai](https://www.deeplearning.ai/)
 - [Coursera](https://fr.coursera.org/specializations/deep-learning)
