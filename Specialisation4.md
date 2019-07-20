@@ -1,6 +1,5 @@
 # Specialisation 4: Convolutional Neural Networks
 
-
 <!-- TOC -->
 
 - [Specialisation 4: Convolutional Neural Networks](#specialisation-4-convolutional-neural-networks)
